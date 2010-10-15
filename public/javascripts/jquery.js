@@ -1,0 +1,1 @@
+/home/sasha/kde-full/qt/doc/src/template/scripts/jquery.js
