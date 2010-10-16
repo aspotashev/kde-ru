@@ -1,16 +1,12 @@
-<html>
-  <head>
-    <%= javascript_include_tag 'jquery', 'application' %>
+<% content_for :title, "hello" %>
 
-    <script type="text/javascript">
-      $(document).ready(function(){
-//        alert("hi");
-      });
-    </script>
-  </head>
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+//      alert("hi");
+    });
+  </script>
+<% end %>
 
-  <body>
-    <h1>Admin#test_jquery</h1>
-  </body>
-</html>
+<h1>Admin#test_jquery</h1>
 
