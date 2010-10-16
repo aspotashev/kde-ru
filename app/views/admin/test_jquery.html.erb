@@ -3,10 +3,64 @@
 <% content_for :head do %>
   <script type="text/javascript">
     $(document).ready(function(){
-//      alert("hi");
+
+      //Code for example A
+      $("input.buttonAsize").click(function(){
+        //alert($("div.contentToChange").find("p").size());
+        //alert($("div.contentToChange p").size());
+        alert($("div.contentToChange p")[0]);
+      });
+
+      //show code example A
+      $("a.codeButtonA").click(function(){
+        $("pre.codeA").toggle(); return false;
+      });
+
+
+      // code for slide up/down
+      $("input.buttonB1").click(function(){
+        $("p.paragraph1:visible").slideUp("slow");
+      });
+      $("input.buttonB2").click(function(){
+        $("p.paragraph1:hidden").slideDown("medium");
+      });
+
+      // code for hide/show
+      $("input.buttonC1").click(function(){
+        $("p.paragraph3").hide("fast");
+      });
+      $("input.buttonC2").click(function(){
+        $("p.paragraph3").show("medium");
+      });
+
     });
   </script>
 <% end %>
 
 <h1>Admin#test_jquery</h1>
+
+
+
+<hr/>
+
+<input type="button" value="Number of Paragraphs" class="buttonAsize" />
+<a href="#" class="codeButtonA">Show&nbsp;/&nbsp;Hide jquery code</a>
+<pre class="codeA">alert($("div.contentToChange p").size());</pre>
+<div class="contentToChange">123<p> abc </p></div>
+
+<hr/>
+
+<input type="button" value="Slide up" class="buttonB1" />
+<input type="button" value="Slide down" class="buttonB2" />
+
+<p class="paragraph1">paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 paragraph1 </p>
+<p class="paragraph2">paragraph2 </p>
+
+<hr/>
+
+<input type="button" value="Hide" class="buttonC1" />
+<input type="button" value="Show" class="buttonC2" />
+
+<p class="paragraph3">paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 paragraph3 </p>
+<p class="paragraph4">paragraph4 </p>
 
