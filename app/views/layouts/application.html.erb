@@ -10,6 +10,12 @@
     <%= render :partial => 'users/user_bar' %>
 
 
+    <!-- see Railscasts: 018 Looping Through Flash -->
+    <% flash.each do |key, msg| %>
+      <%= content_tag :div, msg, :id => 'flash_' + key.to_s %>
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>
