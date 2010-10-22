@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  filename_with_path: MyString
+  moved_to: 1
+
+two:
+  filename_with_path: MyString
+  moved_to: 1

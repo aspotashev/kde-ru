@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016135642) do
+ActiveRecord::Schema.define(:version => 20101022215542) do
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20101016135642) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "translation_files", :force => true do |t|
+    t.string   "filename_with_path"
+    t.integer  "moved_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
