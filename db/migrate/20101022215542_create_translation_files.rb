@@ -6,6 +6,10 @@ class CreateTranslationFiles < ActiveRecord::Migration
 			  # -1 means that it was not moved,
 			  # -2 means that the file was removed
 
+      t.integer :user_locked  # user claiming that he/she is translating
+			      # the file, so others should wait
+			      # for him to avoid collisions
+
       t.timestamps
     end
   end
