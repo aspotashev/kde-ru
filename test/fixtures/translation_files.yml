@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  filename_with_path: MyString
-  moved_to: 1
+  filename_with_path: messages/kdelibs/kdelibs4.po
+  user_locked: 1
+  moved_to: -1
 
 two:
-  filename_with_path: MyString
-  moved_to: 1
+  filename_with_path: messages/kdebase/dolphin.po
+  user_locked: 1
+  moved_to: -1
