@@ -13,7 +13,7 @@ class AdminController < ApplicationController
       :redirect_to => :home_url, :render => "hello"
   def ajax_lock_pofile
     respond_to do |format|
-      format.xml { render :xml => current_user.to_xml }
+      format.xml { render :xml => current_user.to_xml(:only => :login) }
     end
   end
 end

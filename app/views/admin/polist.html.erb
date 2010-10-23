@@ -21,7 +21,13 @@
     <td><%= h(file.filename_with_path) %></td>
     <td>
       <div>
-	<%= link_to file.is_locked? ? 'Unlock' : 'Lock', '#' %>
+	<%=
+	  if file.can_lock?(current_user) or file.can_unlock?(current_user)
+	    link_to file.can_lock?(current_user) ? 'Lock' : 'Unlock', '#'
+	  else
+	    h("Locked by " + User.find(file.user_locked).login)
+	  end
+	%>
       </div>
     </td>
     <td><%= h(User.find(file.user_locked).login) %></td>
