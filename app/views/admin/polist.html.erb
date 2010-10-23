@@ -7,8 +7,8 @@
       //Code for example A
       $("a").click(function(){
 	$.post('ajax_lock_pofile', function(xml){
-	    $("a").append($(xml).find('login'));
-	  });
+	  $("a.ajax_lock").append($(xml).find('login'));
+	});
       });
 
     });
@@ -23,7 +23,8 @@
       <div>
 	<%=
 	  if file.can_lock?(current_user) or file.can_unlock?(current_user)
-	    link_to file.can_lock?(current_user) ? 'Lock' : 'Unlock', '#'
+	    link_to file.can_lock?(current_user) ? 'Lock' : 'Unlock', '#',
+	      :id => '123', :class => 'ajax_lock'
 	  else
 	    h("Locked by " + User.find(file.user_locked).login)
 	  end
