@@ -1,0 +1,11 @@
+<td>
+    <%=
+      if file.can_lock?(current_user) or file.can_unlock?(current_user)
+	link_to file.can_lock?(current_user) ? 'Lock' : 'Unlock', '#',
+	  :id => 'a' + file.id.to_s, :class => 'ajax_lock'
+      else
+	h("Locked by " + User.find(file.user_locked).login)
+      end
+    %>
+</td>
+<td><%= h(User.find(file.user_locked).login) %></td>
