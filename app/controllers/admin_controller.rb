@@ -9,11 +9,23 @@ class AdminController < ApplicationController
   end
   
   
-  verify :method => :post, :xhr => true, :only => :ajax_lock_pofile,
-      :redirect_to => :home_url, :render => "hello"
+#  verify :method => :post, :xhr => true, :only => :ajax_lock_pofile,
+#      :redirect_to => :home_url, :render => "hello"
   def ajax_lock_pofile
+    p TranslationFile.find(params[:id]).user_locked
+    p '-------'
+    x = TranslationFile.find(params[:id])
+    p x
+    x.unlock
+    x.user_locked = -1
+    p x
+    p '-------'
+    p TranslationFile.find(params[:id]).user_locked
     respond_to do |format|
-      format.xml { render :xml => current_user.to_xml(:only => :login) }
+      format.xml {
+	render :partial => 'div_po_locking', :locals => { :file => TranslationFile.find(1) }
+	#render :xml => current_user.to_xml(:only => :login)
+      }
     end
   end
 end

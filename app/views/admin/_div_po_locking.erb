@@ -1,3 +1,4 @@
+<pre>
 <td>
     <%=
       if file.can_lock?(current_user) or file.can_unlock?(current_user)
@@ -8,4 +9,11 @@
       end
     %>
 </td>
-<td><%= h(User.find(file.user_locked).login) %></td>
+
+<td>
+  <%=
+    owner = User.find_by_id_or_nil(file.user_locked)
+    h(owner.login) if owner
+  %>
+</td>
+</pre>

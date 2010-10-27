@@ -47,5 +47,13 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+  # see Railscasts-004
+  def self.find_by_id_or_nil(id)
+    begin
+      find(id)
+    rescue ActiveRecord::RecordNotFound => e
+      nil
+    end
+  end
   
 end

@@ -1,4 +1,5 @@
 class TranslationFile < ActiveRecord::Base
+# checks
   def is_locked?
     user_locked != -1
   end
@@ -16,5 +17,11 @@ class TranslationFile < ActiveRecord::Base
   # TODO: if you are admin, you should be able to do everything
   def can_unlock?(current_user)
     is_locked? and not is_locked_by_other?(current_user)
+  end
+
+# actions
+  def unlock
+    self.user_locked = -1
+    save!
   end
 end

@@ -6,23 +6,27 @@
 
       $("a.ajax_lock").click(function(){
 	clicked_link_id = $(this).attr('id');
-	$.post('ajax_lock_pofile', function(xml){
+	$.post('ajax_lock_pofile/' + clicked_link_id.substr(1), function(data){
 	  //$("a.ajax_lock").append($(xml).find('login'));
 	  $("a.ajax_lock#"+clicked_link_id).append(clicked_link_id);
-	});
+	  //$("div.ajax_lock_div#"+clicked_link_id).html(data);
+	  $("div.ajax_lock_div").html(data);
+	  //alert(data);
+	}, {}, {}, 'html');
       });
 
     });
   </script>
 <% end %>
 
-<table>
+<table border=1>
 <% @files.each do |file| %>
   <tr>
     <td><%= h(file.filename_with_path) %></td>
-    <div>
+
+    <% content_tag :div, :class => "ajax_lock_div", :id => 'a' + file.id.to_s do -%>
       <%= render :partial => 'div_po_locking', :locals => { :file => file } %>
-    </div>
+    <% end -%>
   </tr>
 <% end %>
 </table>
