@@ -7,11 +7,6 @@
       $("a.ajax_lock").click(function(){
 	clicked_link_id = $(this).attr('id');
 	$.post('ajax_lock_pofile/' + clicked_link_id.substr(1), function(data){
-	  //$("a.ajax_lock").append($(xml).find('login'));
-	  //$("div.ajax_lock_div#"+clicked_link_id).html(data);
-
-	  //$("a.ajax_lock#"+clicked_link_id).append(clicked_link_id);
-
 	  $("tr.ajax_lock_div#" + clicked_link_id).html(data);
 	}, {}, {}, 'html');
       });
