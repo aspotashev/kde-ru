@@ -1,4 +1,5 @@
-<pre>
+<td><%= h(file.filename_with_path) %></td>
+
 <td>
     <%=
       if file.can_lock?(current_user) or file.can_unlock?(current_user)
@@ -16,4 +17,3 @@
     h(owner.login) if owner
   %>
 </td>
-</pre>

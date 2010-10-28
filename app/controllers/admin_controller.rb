@@ -23,7 +23,7 @@ class AdminController < ApplicationController
     p TranslationFile.find(params[:id]).user_locked
     respond_to do |format|
       format.xml {
-	render :partial => 'div_po_locking', :locals => { :file => TranslationFile.find(1) }
+	render :partial => 'div_po_locking', :locals => { :file => TranslationFile.find(params[:id].to_i) }
 	#render :xml => current_user.to_xml(:only => :login)
       }
     end
