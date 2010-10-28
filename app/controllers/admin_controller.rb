@@ -14,7 +14,6 @@ class AdminController < ApplicationController
   def ajax_lock_pofile
     x = TranslationFile.find(params[:id])
     x.unlock
-    x.user_locked = -1
 
     respond_to do |format|
       format.xml {
