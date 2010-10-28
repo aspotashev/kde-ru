@@ -13,7 +13,7 @@ class AdminController < ApplicationController
       :redirect_to => :home_url, :render => "hello"
   def ajax_lock_pofile
     x = TranslationFile.find(params[:id])
-    x.unlock
+    x.toggle_locking(current_user)
 
     respond_to do |format|
       format.xml {

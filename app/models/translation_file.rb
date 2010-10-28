@@ -24,4 +24,18 @@ class TranslationFile < ActiveRecord::Base
     self.user_locked = -1
     save!
   end
+
+  def lock(user_id)
+    self.user_locked = user_id
+    save!
+  end
+
+  # lock if unlocked, unlock if locked
+  def toggle_locking(current_user)
+    if is_locked?
+      unlock if can_unlock?(current_user)  # TODO: raise exception or report error here?
+    else
+      lock(current_user.id) if can_lock?(current_user)  # TODO: raise exception or report error here?
+    end
+  end
 end
