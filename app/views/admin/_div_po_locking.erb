@@ -17,3 +17,10 @@
     h(owner.login) if owner
   %>
 </td>
+
+<td>
+  <%=
+    link_to 'Upload', '#',
+      :id => 'a' + file.id.to_s, :class => 'js_upload'
+  %>
+</td>

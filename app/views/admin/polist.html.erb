@@ -20,8 +20,40 @@
 //	}, {}, {}, 'html');
 //      });
 
+      function uploadDialog(uploadButton, poId) {
+
+	overlay=document.createElement('div');
+	overlay.className='upload-overlay';
+
+	viewport_width = window.innerWidth;
+	viewport_height = window.innerHeight;
+
+	overlay.style.width  = viewport_width + 'px';
+	overlay.style.height = viewport_height + 'px';
+
+	overlay.innerHTML='<%= escape_javascript(render(:partial => "upload_overlay")) %>';
+
+	document.body.appendChild(overlay);
+      }
+
+      $("a.js_upload").live("click", function(){
+// 	clicked_link_id = $(this).attr('id');
+
+	uploadDialog(this, $(this).attr('id'));
+      });
+
     });
   </script>
+
+  <style type="text/css">
+    .upload-overlay {
+      position:fixed;
+      top:0;
+      left:0;
+      background:#141414;
+      opacity:0.8;
+    }
+  </style>
 <% end %>
 
 <table border=1>
