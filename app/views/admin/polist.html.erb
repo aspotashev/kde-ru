@@ -21,24 +21,13 @@
 //      });
 
       function uploadDialog(uploadButton, poId) {
-
-	overlay=document.createElement('div');
-	overlay.className='upload-overlay';
-
-	viewport_width = window.innerWidth;
-	viewport_height = window.innerHeight;
-
-	overlay.style.width  = viewport_width + 'px';
-	overlay.style.height = viewport_height + 'px';
-
-	overlay.innerHTML='<%= escape_javascript(render(:partial => "upload_overlay")) %>';
-
-	document.body.appendChild(overlay);
+	overlay = $("div.upload-overlay");
+	overlay.css("visibility","visible");
+	overlay.css("width", window.innerWidth + 'px');
+	overlay.css("height", window.innerHeight + 'px');
       }
 
       $("a.js_upload").live("click", function(){
-// 	clicked_link_id = $(this).attr('id');
-
 	uploadDialog(this, $(this).attr('id'));
       });
 
@@ -52,6 +41,7 @@
       left:0;
       background:#141414;
       opacity:0.8;
+      visibility:hidden;
     }
   </style>
 <% end %>
@@ -63,3 +53,7 @@
   <% end -%>
 <% end %>
 </table>
+
+<div class="upload-overlay">
+  <%= render(:partial => "upload_overlay") %>
+</div>
