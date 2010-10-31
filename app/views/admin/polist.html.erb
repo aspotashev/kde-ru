@@ -2,6 +2,15 @@
 
 <% content_for :head do %>
   <script type="text/javascript">
+
+    function onUploadSubmit(id) {
+      alert("123");
+
+      $.post('ajax_upload/' + id.substr(1), function(data){
+	$("div.upload-overlay").append('done');
+      }, {}, {}, 'html');
+    }
+
     $(document).ready(function(){
 
 
@@ -20,7 +29,7 @@
 //	}, {}, {}, 'html');
 //      });
 
-      function uploadDialog(uploadButton, poId) {
+      function uploadDialog(uploadButton, id) {
 	overlay = $("div.upload-overlay");
 	overlay.css("visibility","visible");
 	overlay.css("width", window.innerWidth + 'px');
@@ -55,5 +64,5 @@
 </table>
 
 <div class="upload-overlay">
-  <%= render(:partial => "upload_overlay") %>
+  <%= render :partial => "upload_overlay" %>
 </div>

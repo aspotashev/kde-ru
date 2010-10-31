@@ -9,7 +9,7 @@ class AdminController < ApplicationController
   end
   
   
-  verify :method => :post, :xhr => true, :only => :ajax_lock_pofile,
+  verify :method => :post, :xhr => true, :only => :ajax_lock_pofile, #[:ajax_lock_pofile, :ajax_upload],
       :redirect_to => :home_url, :render => "hello"
   def ajax_lock_pofile
     x = TranslationFile.find(params[:id])
@@ -19,6 +19,16 @@ class AdminController < ApplicationController
       format.xml {
 	render :partial => 'div_po_locking', :locals => { :file => TranslationFile.find(params[:id].to_i) }
 	#render :xml => current_user.to_xml(:only => :login)
+      }
+    end
+  end
+
+  def ajax_upload
+    x = TranslationFile.find(params[:id])
+
+    respond_to do |format|
+      format.xml {
+	render :html => "123"
       }
     end
   end
