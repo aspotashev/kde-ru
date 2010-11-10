@@ -24,11 +24,12 @@ class AdminController < ApplicationController
   end
 
   def ajax_upload
+    p params
     x = TranslationFile.find(params[:id])
 
     respond_to do |format|
       format.xml {
-	render :html => "123"
+	render :xml => "123"
       }
     end
   end

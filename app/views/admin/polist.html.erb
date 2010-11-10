@@ -4,11 +4,21 @@
   <script type="text/javascript">
 
     function onUploadSubmit(id) {
-      alert("123");
+      $("uploadForm").attr("action", 'ajax_upload/' + $("form.uploadForm").attr("id").substr(1));
+      $("uploadForm").attr("method", "POST");
+      $("uploadForm").attr("target", "uploadForm");
+      $("uploadForm").submit();
 
-      $.post('ajax_upload/' + id.substr(1), function(data){
-	$("div.upload-overlay").append('done');
+      $.post('ajax_upload/' + $("form.uploadForm").attr("id").substr(1), function(data){
+	//alert("456");
+	//$("div.upload-overlay").append('done');
+
+	$("div.upload-overlay").css("visibility", "hidden");
       }, {}, {}, 'html');
+    }
+
+    function onUploadCancel() {
+      $("div.upload-overlay").css("visibility", "hidden");
     }
 
     $(document).ready(function(){
@@ -30,6 +40,8 @@
 //      });
 
       function uploadDialog(uploadButton, id) {
+	$("form.uploadForm").attr("id", id);
+
 	overlay = $("div.upload-overlay");
 	overlay.css("visibility","visible");
 	overlay.css("width", window.innerWidth + 'px');
