@@ -9,13 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117192149) do
+ActiveRecord::Schema.define(:version => 20101117192511) do
 
   create_table "file_contents", :force => true do |t|
     t.integer  "user"
     t.integer  "translation_file"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "content_file_name"
+    t.string   "content_content_type"
+    t.integer  "content_file_size"
+    t.datetime "content_updated_at"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|
