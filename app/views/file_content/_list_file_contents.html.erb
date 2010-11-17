@@ -1,0 +1,7 @@
+<p>
+<% list.each_with_index do |content,index| %>
+  <%= index+1 %>. <%= content.created_at %> <%= link_to_user(content.user) %> <%= content.content.size %>
+  <br/>
+<% end %>
+</p>
+

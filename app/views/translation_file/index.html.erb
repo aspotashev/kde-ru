@@ -1,6 +1,6 @@
 <h1>TranslationFile#index(<%= @file.id %>, <%= @file.filename_with_path %>)</h1>
 
-<h2><%= @file.file_contents.size %></h2>
+<%= render :partial => 'file_content/list_file_contents', :locals => { :list => @file.file_contents } %>
 
 <% form_for :file_content, @file, :url => {:controller => :file_content, :action => :create, :translation_file_id => @file.id}, :html => { :multipart => true } do |f| %>
   <p>
