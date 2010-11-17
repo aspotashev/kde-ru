@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117192511) do
+ActiveRecord::Schema.define(:version => 20101117214413) do
 
   create_table "file_contents", :force => true do |t|
-    t.integer  "user"
-    t.integer  "translation_file"
+    t.integer  "user_id"
+    t.integer  "translation_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "content_file_name"
