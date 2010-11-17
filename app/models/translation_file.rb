@@ -2,6 +2,8 @@
 # (there is only one instance of TranslationFile for
 # kdebase/dolphin.po, for example)
 class TranslationFile < ActiveRecord::Base
+  has_many :file_contents
+
 # checks
   def is_locked?
     user_locked != -1

@@ -1,3 +1,10 @@
 <h1>TranslationFile#index(<%= @file.id %>, <%= @file.filename_with_path %>)</h1>
-<p>
-</p>
+
+<h2><%= @file.file_contents.size %></h2>
+
+<% form_for :file_content, @file, :url => {:controller => :file_content, :action => :create, :translation_file_id => @file.id}, :html => { :multipart => true } do |f| %>
+  <p>
+    <%= f.file_field :content %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
