@@ -1,3 +1,6 @@
+# One object of TranslationFile per file name
+# (there is only one instance of TranslationFile for
+# kdebase/dolphin.po, for example)
 class TranslationFile < ActiveRecord::Base
 # checks
   def is_locked?
