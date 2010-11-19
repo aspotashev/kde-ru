@@ -1,4 +1,4 @@
-<td><%= h(file.filename_with_path) %></td>
+<td><%= link_to h(file.filename_with_path), :controller => 'translation_file', :action => 'index', :id => file.id %></td>
 
 <td>
     <%=
