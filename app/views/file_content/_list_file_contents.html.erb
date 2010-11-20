@@ -1,6 +1,6 @@
 <p>
 <% list.each_with_index do |content,index| %>
-  <%= index+1 %>. <%= content.created_at %> <%= link_to_user(content.user) %> <%= content.content.size %>
+  <%= index+1 %>. <%= link_to h(content.translation_file.filename_with_path), :controller => 'translation_file', :action => 'index', :id => content.translation_file.id %> <%= content.created_at %> <%= link_to_user(content.user) %> <%= content.content.size %>
   <br/>
 <% end %>
 </p>
