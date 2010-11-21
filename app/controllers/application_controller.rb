@@ -8,5 +8,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :password
+
+
+  protected
+    def render_optional_error_file(status_code)
+      render :template => 'errors/500', :status => 500, :layout => 'application'
+    end
+
+    def rescues_path(template_name)
+      "#{template_root}/rescues/#{template_name}.rhtml"
+    end
 end

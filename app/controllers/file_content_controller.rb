@@ -1,4 +1,6 @@
 class FileContentController < ApplicationController
+  before_filter :login_required
+
   def create
     res = FileContent.create(params[:file_content].merge(:translation_file_id => params[:translation_file_id], :user_id => current_user.id))
 
