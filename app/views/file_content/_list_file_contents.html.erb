@@ -1,13 +1,23 @@
 <p>
+<table border="0">
 <% list.each_with_index do |content,index| %>
-  <%= index+1 %>. <%= link_to h(content.translation_file.filename_with_path), :controller => 'translation_file', :action => 'index', :id => content.translation_file.id %> <%= content.created_at %> <%= link_to_user(content.user) %> <%= content.content.size %>
-
-  Number of errors: <%=
+<tr>
+  <td><%= index+1 %>.</td>
+  <td><%= link_to h(content.translation_file.filename_with_path),
+        :controller => 'translation_file', :action => 'index',
+        :id => content.translation_file.id %>
+  (<%= link_to h(content.content.original_filename), content.content.url %>)</td>
+  <td><%= content.created_at %></td>
+  <td><%= link_to_user(content.user) %></td>
+  <td>size=<%= content.content.size %></td>
+  <td>
+  <%=
     $po_backend.error_hook = lambda {|s| flash[:error] = s }
     (posieve = $po_backend.posieve) ? posieve.check_rules(content.content.to_file.read).size : 'n/a'
-  %>
+  %> error(s)
   <%= link_to 'more...', :controller => 'file_content', :action => 'show', :id => content.id %>
-  <br/>
+  </td>
+</tr>
 <% end %>
+</table>
 </p>
-
