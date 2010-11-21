@@ -1,0 +1,9 @@
+div.flash_error {
+  padding: 3px 5px;
+  font-weight: bold;
+  color: #f00;
+  border-left: solid 5px #f66;
+  border-top: solid 1px #f66;
+  border-bottom: solid 1px #f66;
+  border-right: solid 1px #f66;
+}

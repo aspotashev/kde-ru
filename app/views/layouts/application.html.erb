@@ -3,6 +3,7 @@
     <title><%= h(yield(:title) || "Untitled") %></title>
 
     <%= javascript_include_tag 'jquery', 'application' %>
+    <%= stylesheet_link_tag 'application' %>
     <%= yield(:head) %>
   </head>
 
@@ -13,7 +14,7 @@
 
     <!-- see Railscasts: 018 Looping Through Flash -->
     <% flash.each do |key, msg| %>
-      <%= content_tag :div, msg, :id => 'flash_' + key.to_s %>
+      <%= content_tag :div, msg, :class => 'flash_' + key.to_s %>
     <% end %>
 
 
