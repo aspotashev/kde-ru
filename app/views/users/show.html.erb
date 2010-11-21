@@ -1,5 +1,5 @@
 <h2>
-  Homepage of user '<b><%= current_user.login %>'</b>
+  Homepage of user '<b><%= @user.login %>'</b>
 </h2>
 
 <%= render :partial => 'file_content/list_file_contents', :locals => { :list => @user.file_contents } %>
