@@ -1,0 +1,35 @@
+<h2>This page describes the uploaded file '<%= @file.content.original_filename %>'</h2>
+
+<% @errors.each do |err| %>
+  <table border="1" width="99%">
+    <tr>
+      <td rowspan="2" style="font-weight:bold; background-color:#88f">
+        <%= h('#' + err[:refentry]) %>
+      </td>
+      <td colspan="2">
+        <%= h(err[:msgctxt]) %>
+      </td>
+    <tr/>
+    
+    <tr>
+      <td/>
+      <td rowspan="2">
+        <%= h(err[:msgid]) %>
+      </td>
+      <td rowspan="2">
+        <%= h(err[:msgstr]) %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= h('line ' + err[:line]) %></td>
+    </tr>
+    
+    <tr>
+      <td/>
+      <td colspan="2" align="center" style="background-color:#fcc;">
+        <%= h(err[:hint]) %>
+      </td>
+    </tr>
+  </table>
+<% end %>

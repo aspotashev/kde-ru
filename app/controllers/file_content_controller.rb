@@ -11,4 +11,16 @@ class FileContentController < ApplicationController
     redirect_to :back
   end
 
+  def show
+    @file = FileContent.find(params[:id])
+
+    $po_backend.error_hook = lambda {|s| flash[:error] = s }
+    if posieve = $po_backend.posieve
+      @errors = posieve.check_rules(@file.content.to_file.read)
+    else
+      @errors = []
+      flash[:error] = "Could not obtain result of checking."
+    end
+  end
+
 end

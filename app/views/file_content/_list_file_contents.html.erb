@@ -6,6 +6,7 @@
     $po_backend.error_hook = lambda {|s| flash[:error] = s }
     (posieve = $po_backend.posieve) ? posieve.check_rules(content.content.to_file.read).size : 'n/a'
   %>
+  <%= link_to 'more...', :controller => 'file_content', :action => 'show', :id => content.id %>
   <br/>
 <% end %>
 </p>
