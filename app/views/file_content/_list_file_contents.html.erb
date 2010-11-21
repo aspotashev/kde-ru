@@ -6,7 +6,6 @@
     $po_backend.error_hook = lambda {|s| flash[:error] = s }
     (posieve = $po_backend.posieve) ? posieve.check_rules(content.content.to_file.read).size : 'n/a'
   %>
-  <%= p flash[:error] %>
   <br/>
 <% end %>
 </p>
