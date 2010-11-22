@@ -13,8 +13,10 @@ class FileContent < ActiveRecord::Base
     def validate_on_create
       # This solution looks bad, because it doesn't use Paperclip validates_attachment_*
       # But another solution (http://mibly.com/2008/05/13/custom-validation-with-paperclip/) does not work
-      res = $po_backend.gettext.check_po_validity(content.queued_for_write[:original].read)
-      if res
+      res = $po_backend.gettext
+      if res.nil?
+        errors.add_to_base("po_backend not working")
+      elsif res.check_po_validity(content.queued_for_write[:original].read)
         errors.add_to_base("Your file is not a Gettext translation file (.po)")
       end
     end

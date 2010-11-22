@@ -4,6 +4,7 @@ class FileContentController < ApplicationController
   before_filter :login_required
 
   def create
+    $po_backend.error_hook = lambda {|s| flash[:error] = s } # TODO: where should this be?
     res = FileContent.create(params[:file_content].merge(:translation_file_id => params[:translation_file_id], :user_id => current_user.id))
 
     begin
