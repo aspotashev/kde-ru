@@ -1,4 +1,6 @@
 module FileContentHelper
+  private # helper methods are not controller actions!
+
   def posieve_check_rules_fill_cache(file_content)
     $po_backend.error_hook = lambda {|s| flash[:error] = s }
     if posieve = $po_backend.posieve
