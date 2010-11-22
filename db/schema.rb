@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117214413) do
+ActiveRecord::Schema.define(:version => 20101122200806) do
 
   create_table "file_contents", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20101117214413) do
     t.string   "content_content_type"
     t.integer  "content_file_size"
     t.datetime "content_updated_at"
+    t.text     "pology_errors_cache"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|
