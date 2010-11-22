@@ -1,4 +1,6 @@
 class FileContentController < ApplicationController
+  include FileContentHelper
+
   before_filter :login_required
 
   def create
@@ -15,11 +17,9 @@ class FileContentController < ApplicationController
 
   def show
     @file = FileContent.find(params[:id])
+    @errors = posieve_check_rules(@file)
 
-    $po_backend.error_hook = lambda {|s| flash[:error] = s }
-    if posieve = $po_backend.posieve
-      @errors = posieve.check_rules(@file.content.to_file.read)
-    else
+    if @errors.nil?
       @errors = []
       flash[:error] = "Could not obtain result of checking."
     end

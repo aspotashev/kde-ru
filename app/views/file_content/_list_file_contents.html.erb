@@ -12,8 +12,8 @@
   <td>size=<%= content.content.size %></td>
   <td>
   <%=
-    $po_backend.error_hook = lambda {|s| flash[:error] = s }
-    (posieve = $po_backend.posieve) ? posieve.check_rules(content.content.to_file.read).size : 'n/a'
+    res = posieve_check_rules(content)
+    res ? res.size : 'n/a'
   %> error(s)
   <%= link_to 'more...', :controller => 'file_content', :action => 'show', :id => content.id %>
   </td>
