@@ -8,6 +8,7 @@ module FileContentHelper
 
       if res
         file_content.pology_errors_cache = res.to_yaml
+        file_content.pology_errors_count_cache = res.size
         file_content.save!
       end
     else
@@ -24,5 +25,14 @@ module FileContentHelper
     end
 
     YAML.load(file_content.pology_errors_cache)
+  end
+
+  def posieve_check_rules_count(file_content)
+    if file_content.pology_errors_cache.nil? or file_content.pology_errors_cache.empty? or
+        file_content.updated_at < Time.now - 1.day # force update every day
+      posieve_check_rules_fill_cache(file_content)
+    end
+
+    file_content.pology_errors_count_cache
   end
 end

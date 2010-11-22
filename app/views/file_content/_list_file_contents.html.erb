@@ -12,8 +12,7 @@
   <td>size=<%= content.content.size %></td>
   <td>
   <%=
-    res = posieve_check_rules(content)
-    res ? res.size : 'n/a'
+    posieve_check_rules_count(content) || 'n/a'
   %> error(s)
   <%= link_to 'more...', :controller => 'file_content', :action => 'show', :id => content.id %>
   </td>
