@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20101122203142) do
 
   create_table "translation_files", :force => true do |t|
     t.string   "filename_with_path"
-    t.integer  "moved_to"
-    t.integer  "user_locked"
+    t.integer  "moved_to",           :default => -1
+    t.integer  "user_locked",        :default => -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
