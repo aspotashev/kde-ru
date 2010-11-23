@@ -2,7 +2,7 @@
 
 require 'drb'
 
-$po_backend = DRbObject.new nil, 'druby://:9000'
+$po_backend = DRbObject.new nil, 'drbunix:///tmp/po-backend-unix-socket'
 
 class Object
   def singleton_class
