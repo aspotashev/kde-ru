@@ -10,7 +10,8 @@
   <body>
     <%= render :partial => 'users/user_bar' %>
 
-    <%= link_to 'List of .PO files', :controller => 'admin', :action => 'polist' %>
+    <!-- <%= link_to 'List of .PO files', :controller => 'admin', :action => 'polist' %> -->
+    <%= link_to 'Main page', '/' %>
 
     <!-- see Railscasts: 018 Looping Through Flash -->
     <% flash.each do |key, msg| %>
