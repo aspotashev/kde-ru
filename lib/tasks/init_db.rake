@@ -4,8 +4,8 @@ namespace :db do
 
   task :init_db => :environment do
     FileContent.delete_all
-    OpenIdAuthenticationAssociation.delete_all
-    OpenIdAuthenticationNonce.delete_all
+    #OpenIdAuthenticationAssociation.delete_all
+    #OpenIdAuthenticationNonce.delete_all
     TranslationFile.delete_all
     User.delete_all
 
