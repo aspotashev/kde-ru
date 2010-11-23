@@ -6,7 +6,11 @@ class FileContent < ActiveRecord::Base
 
   has_attached_file :content
   validates_attachment_presence :content
+
+  # This doesn't help (rails still crashes on uploads > 2mb).
+  # To be safe, add "LimitRequestBody 2097152" to apache2 config.
   validates_attachment_size :content, :less_than => 2.megabytes
+
 #  validates_attachment_valid_po :content # valid .po translation file
 
   protected
