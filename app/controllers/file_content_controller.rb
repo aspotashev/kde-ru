@@ -26,4 +26,10 @@ class FileContentController < ApplicationController
     end
   end
 
+  def delete
+    @file = FileContent.find(params[:id])
+    @file.delete(current_user)
+    redirect_to :back
+  end
+
 end

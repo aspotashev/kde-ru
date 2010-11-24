@@ -13,6 +13,20 @@ class FileContent < ActiveRecord::Base
 
 #  validates_attachment_valid_po :content # valid .po translation file
 
+  # TODO: if you are admin, you should be able to do everything
+  def can_delete?(current_user)
+    user.id == current_user.id
+  end
+
+  def delete(current_user)
+    if can_delete?(current_user)
+      destroy_attached_files # delete attachments (files from disk)
+      destroy # remove record from database
+    else
+      raise 'you are not allowed to remove this FileContent'
+    end
+  end
+
   protected
     def validate_on_create
       # This solution looks bad, because it doesn't use Paperclip validates_attachment_*

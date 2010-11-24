@@ -16,6 +16,9 @@
   %> error(s)
   <%= link_to 'more...', :controller => 'file_content', :action => 'show', :id => content.id %>
   </td>
+  <td>
+    <%= link_to 'delete', '/file_content/delete/' + content.id.to_s, :confirm => 'are you sure?', :method => :delete %>
+  </td>
 </tr>
 <% end %>
 </table>
