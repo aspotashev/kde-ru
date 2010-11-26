@@ -7,17 +7,17 @@
         <%= h('#' + err[:refentry]) %>
       </td>
       <td colspan="2">
-        <%= h(err[:msgctxt]) %>
+        <%= h(err[:msgctxt].force_encoding('UTF-8')) %>
       </td>
     <tr/>
     
     <tr>
       <td/>
       <td rowspan="2">
-        <%= h(err[:msgid]) %>
+        <%= h(err[:msgid].force_encoding('UTF-8')) %>
       </td>
       <td rowspan="2">
-        <%= h(err[:msgstr]) %>
+        <%= h(err[:msgstr].force_encoding('UTF-8')) %>
       </td>
     </tr>
 
@@ -28,7 +28,7 @@
     <tr>
       <td/>
       <td colspan="2" align="center" style="background-color:#fcc;">
-        <%= h(err[:hint]) %>
+        <%= h(err[:hint].force_encoding('UTF-8')) %>
       </td>
     </tr>
   </table>
