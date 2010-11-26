@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
     end
 
     def rescues_path(template_name)
-      "#{template_root}/rescues/#{template_name}.rhtml"
+      "#{view_paths.first}/rescues/#{template_name}.html.erb"
     end
 end
