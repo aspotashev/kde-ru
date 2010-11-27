@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :login_required
+
   # render new.rhtml
   def new
     @user = User.new
@@ -24,5 +26,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def list
+    @users = User.find(:all)
   end
 end

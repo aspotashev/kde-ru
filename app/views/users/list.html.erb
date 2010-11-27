@@ -1,0 +1,12 @@
+<table border="1">
+<% @users.each do |user| %>
+  <tr>
+    <td>
+      <%= link_to h(user.login), :controller => 'users', :action => 'show', :id => user.id %>
+    </td>
+    <td>
+      <%= user.created_at %>
+    </td>
+  </tr>
+<% end %>
+</table>

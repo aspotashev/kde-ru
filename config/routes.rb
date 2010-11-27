@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 #  map.home '', :controller => 'admin', :action => 'test_jquery'
   map.home '', :controller => 'translation_file', :action => 'index', :id => 1
+  map.connect '/users/list', :controller => 'users', :action => 'list'
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
