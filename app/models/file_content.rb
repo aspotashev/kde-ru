@@ -18,6 +18,7 @@ class FileContent < ActiveRecord::Base
     user.id == current_user.id
   end
 
+  # TODO: allow only "delete" HTTP method
   def delete(current_user)
     if can_delete?(current_user)
       destroy_attached_files # delete attachments (files from disk)
