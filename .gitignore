@@ -3,3 +3,4 @@
 *~
 *.log
 *.sqlite3
+/public/system
