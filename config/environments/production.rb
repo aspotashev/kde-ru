@@ -33,10 +33,11 @@ config.action_mailer.raise_delivery_errors = true
 config.action_mailer.delivery_method = :smtp
 
 # these options are only needed if you choose smtp delivery
+# We use a local SMTP server (postfix), it is not available from the Net
 config.action_mailer.smtp_settings = {
-  :address        => "l10n",
+  :address        => "localhost",
   :port           => "25",
-  :domain         => "kde.ru",
+  :domain         => "localdomain",
 }
 
 # Disable logging to hide e-mails form logs (e-mails can contain passwords)
