@@ -13,5 +13,21 @@ config.action_controller.consider_all_requests_local = true
 config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
+#------------------- ActionMailer -------------------
+# see Railscasts episode 061
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = true
+
+# set delivery method to :smtp, :sendmail or :test
+config.action_mailer.delivery_method = :smtp
+
+# these options are only needed if you choose smtp delivery
+config.action_mailer.smtp_settings = {
+  :address        => "myhost",
+  :port           => "25",
+  :domain         => "mynetwork",
+}
+
+# Disable logging to hide e-mails form logs (e-mails can contain passwords)
+# TODO: how to filter passwords from activation e-mails?
+config.action_mailer.logger = nil
