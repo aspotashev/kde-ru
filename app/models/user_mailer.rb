@@ -22,9 +22,3 @@ class UserMailer < ActionMailer::Base
       @body[:user] = user
     end
 end
-
-
-# try running this: (it works at my local computer!)
-#
-#    UserMailer.deliver_activation(User.find(5))
-#
