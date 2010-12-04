@@ -37,7 +37,7 @@ config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   :address        => "localhost",
   :port           => "25",
-  :domain         => "localdomain",
+  :domain         => "l10n.kde.ru",
 }
 
 # Disable logging to hide e-mails form logs (e-mails can contain passwords)
