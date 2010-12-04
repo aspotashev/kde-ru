@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
     setup_email(user)
     @subject    += 'Please activate your new account'
   
-    @body[:url]  = "http://localhost:3000/users/activate/#{user.activation_code}"
+    @body[:url]  = "http://l10n.kde.ru/users/activate/#{user.activation_code}"
   
   end
   
