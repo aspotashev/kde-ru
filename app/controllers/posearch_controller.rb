@@ -16,13 +16,6 @@ class PosearchController < ApplicationController
     #@msgs = PoMessageEntry.find_by_filename_and_index(message_ids)
     #@msgs = PoMessageEntry.find_by_filename_and_index(['messages/kdeutils/ark.po', 'messages/kdeutils/filelight.po'], [8, 28])
 
-    p @msgs
-
     render :partial => 'search_results'
-
-#    render :update do |page|
-#      page.replace_html 'institution_title_auto_complete', :text => search #:partial => 'search_results'
-#      page['institution_title_auto_complete'].show
-#    end
   end
 end
