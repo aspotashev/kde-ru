@@ -3,8 +3,10 @@
 <% end %>
 
 
-<%= text_field :search, :string %>
-<div class="auto_complete" id="search_string_auto_complete"></div>
+<p>
+  <%= text_field :search, :string %>
+  <div class="auto_complete" id="search_string_auto_complete"></div>
+</p>
 
 <script type="text/javascript">
   new Ajax.Autocompleter(
