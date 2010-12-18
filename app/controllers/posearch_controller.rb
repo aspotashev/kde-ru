@@ -12,6 +12,8 @@ class PosearchController < ApplicationController
       PoMessageEntry.find_by_filename_and_index(id[0], id[1])
     end
 
+    @msgs.select! {|x| not x[:msgid].empty? } # HACK
+
     # These do not work:
     #@msgs = PoMessageEntry.find_by_filename_and_index(message_ids)
     #@msgs = PoMessageEntry.find_by_filename_and_index(['messages/kdeutils/ark.po', 'messages/kdeutils/filelight.po'], [8, 28])
