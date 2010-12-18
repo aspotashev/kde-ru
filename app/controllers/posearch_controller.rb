@@ -5,7 +5,7 @@ class PosearchController < ApplicationController
   def auto_complete_request
     search = params['text']
 
-    message_ids = IndexSearch.request(search.to_s, 10) # pairs (filename, index)
+    message_ids = IndexSearch.request(search.to_s, 20) # pairs (filename, index)
 #    message_ids = message_ids.map {|id| [id[0], id[1]] }.flatten
 
     @msgs = message_ids.map do |id|
