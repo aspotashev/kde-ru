@@ -15,7 +15,7 @@ class FileContent < ActiveRecord::Base
 
   # TODO: if you are admin, you should be able to do everything
   def can_delete?(current_user)
-    user.id == current_user.id
+    user.id == current_user.id && !current_user.anonymous?
   end
 
   # TODO: allow only "delete" HTTP method
