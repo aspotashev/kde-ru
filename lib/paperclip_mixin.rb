@@ -4,6 +4,8 @@ module Paperclip
       # http://mibly.com/2008/05/13/custom-validation-with-paperclip/
       # 
       # this does not work!!! (@attachment_definitions is nil)
+
+      # FIXME: didn't write code here anymore, this is not used!!!
       @attachment_definitions[name][:validations] << lambda do |attachment, instance|
         if attachment.file.nil? || !File.exist?(attachment.file.path)
           "must be set"
