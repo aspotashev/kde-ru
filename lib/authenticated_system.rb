@@ -3,13 +3,13 @@ module AuthenticatedSystem
     # Returns true or false if the user is logged in.
     # Preloads @current_user with the user model if they're logged in.
     def logged_in?
-      !!current_user
+      current_user && (!current_user.anonymous?)
     end
 
     # Accesses the current user from the session.
     # Future calls avoid the database because nil is not equal to false.
     def current_user
-      @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless @current_user == false
+      @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie || login_from_anonymous) unless @current_user == false
     end
 
     # Store the given user id in the session.
@@ -128,6 +128,10 @@ module AuthenticatedSystem
         handle_remember_cookie! false # freshen cookie token (keeping date)
         self.current_user
       end
+    end
+
+    def login_from_anonymous
+      @current_user = User.find(-1)
     end
 
     # This is ususally what you want; resetting the session willy-nilly wreaks
