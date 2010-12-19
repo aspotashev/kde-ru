@@ -24,7 +24,8 @@ class FileContent < ActiveRecord::Base
       destroy_attached_files # delete attachments (files from disk)
       destroy # remove record from database
     else
-      raise 'you are not allowed to remove this FileContent'
+      errors.add_to_base("you are not allowed to remove this FileContent")
+      raise "you are not allowed to remove this FileContent"
     end
   end
 
