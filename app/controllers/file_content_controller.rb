@@ -1,7 +1,7 @@
 class FileContentController < ApplicationController
   include FileContentHelper
 
-  before_filter :login_required, :except => :show
+  before_filter :login_required, :except => [:show, :create]
 
   def create
     $po_backend.error_hook = lambda {|s| flash[:error] = s } # TODO: where should this be?
