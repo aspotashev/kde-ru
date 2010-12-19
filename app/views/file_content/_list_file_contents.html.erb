@@ -17,7 +17,9 @@
   <%= link_to 'more...', :controller => 'file_content', :action => 'show', :id => content.id %>
   </td>
   <td>
+    <% if content.can_delete?(current_user) %>
     <%= link_to 'delete', '/file_content/delete/' + content.id.to_s, :confirm => 'are you sure?', :method => :delete %>
+    <% end %>
   </td>
 </tr>
 <% end %>
