@@ -33,6 +33,8 @@ module FileContentHelper
       posieve_check_rules_fill_cache(file_content)
     end
 
+    puts "file_content.pology_errors_count_cache:"
+    p file_content.pology_errors_count_cache
     file_content.pology_errors_count_cache
   end
 end
