@@ -1,3 +1,4 @@
 #!/bin/sh
+# http://benjamin-meyer.blogspot.com/2008/10/git-hooks.html
 
 sudo -u webapps bash -c "cd /webapps/kde-ru-l10n-app ; git pull ; touch tmp/restart.txt"
