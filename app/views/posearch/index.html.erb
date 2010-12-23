@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <script type="text/javascript">
-    function onKeyPress()
+    function updateResults()
     {
       requested = $("input#search_string").val();
       $.get('/posearch/auto_complete_request', { 'text': $("input#search_string").val() }, function(data){
@@ -15,6 +15,6 @@
 
 
 <p>
-  <%= text_field :search, :string, :onkeyup => "onKeyPress();", :onclick => "onKeyPress();" %>
+  <%= text_field :search, :string, :onkeyup => "updateResults();", :onclick => "updateResults();" %>
   <div class="auto_complete" id="search_string_auto_complete"></div>
 </p>
