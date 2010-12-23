@@ -2,8 +2,12 @@
   <script type="text/javascript">
     function onKeyPress()
     {
+      requested = $("input#search_string").val();
       $.get('/posearch/auto_complete_request', { 'text': $("input#search_string").val() }, function(data){
-	  $("div#search_string_auto_complete").html(data);
+	  if (requested == $("input#search_string").val()) // check if the results are still relevant
+	  {
+	    $("div#search_string_auto_complete").html(data);
+	  }
 	});
     }
   </script>
