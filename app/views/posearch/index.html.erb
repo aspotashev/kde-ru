@@ -3,6 +3,10 @@
     function updateResults()
     {
       requested = $("input#search_string").val();
+      if (requested == '')
+	return;
+
+      $("a#link-to-query").attr("href", '<%= url_for :controller => 'posearch', :q => '' %>' + encodeURIComponent(requested));
       $.get('/posearch/auto_complete_request', { 'text': $("input#search_string").val() }, function(data){
 	  if (requested == $("input#search_string").val()) // check if the results are still relevant
 	  {
@@ -10,12 +14,18 @@
 	  }
 	});
     }
+
+    $(document).ready(function(){
+      updateResults(); // necessary if there was a query in URL parameters
+    });
   </script>
 <% end %>
 
 
 <p>
-  <%= text_field :search, :string, :onkeyup => "updateResults();", :onclick => "updateResults();",
-	 :autocomplete => 'off', :size => 50 %>
+  <%= text_field :search, :string,
+	:onkeyup => "updateResults();", :onclick => "updateResults();",
+	:autocomplete => 'off', :size => 50, :value => params[:q] %>
+  <%= link_to 'link', { :controller => 'posearch', :action => 'index' }, :id => 'link-to-query' %>
   <div class="auto_complete" id="search_string_auto_complete"></div>
 </p>
