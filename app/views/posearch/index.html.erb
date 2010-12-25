@@ -15,6 +15,7 @@
 
 
 <p>
-  <%= text_field :search, :string, :onkeyup => "updateResults();", :onclick => "updateResults();" %>
+  <%= text_field :search, :string, :onkeyup => "updateResults();", :onclick => "updateResults();",
+	 :autocomplete => 'off', :size => 50 %>
   <div class="auto_complete" id="search_string_auto_complete"></div>
 </p>
