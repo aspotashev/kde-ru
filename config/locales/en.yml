@@ -1,5 +1,29 @@
-# Sample localization file for English. Add more files in this directory for other locales.
+# Add more files in this directory for other locales.
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  sect_home: "Main Page"
+  sect_posearch: "GUI Translation Search"
+  posearch_link: "link"
+  userbar_logout: "Log out"
+  userbar_logout_desc: "Log out"
+  userbar_login: "Log in"
+  userbar_login_desc: "Log in"
+  userbar_signup: "Sign up"
+  userbar_signup_desc: "Create an account"
+  users:
+    new:
+      caption: "Sign up as a new user"
+      login: "Login"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Confirm Password"
+      signup: "Sign up"
+  sessions:
+    new:
+      login: "Login"
+      password: "Password"
+      caption: "Log In"
+      signin: "Log in"
+      signup_info: "If you don't have an account yet, you can "
+      signup: "Sign Up"

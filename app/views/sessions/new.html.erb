@@ -1,10 +1,10 @@
-<h1>Log In</h1>
+<h1><%= t('.caption') %></h1>
 
 <% form_tag session_path do -%>
-<p><%= label_tag 'login' %><br />
+<p><%= label_tag t('.login') %><br />
 <%= text_field_tag 'login', @login %></p>
 
-<p><%= label_tag 'password' %><br/>
+<p><%= label_tag t('.password') %><br/>
 <%= password_field_tag 'password', nil %></p>
 
 <!-- Uncomment this if you want this functionality
@@ -12,15 +12,15 @@
 <%= check_box_tag 'remember_me', '1', @remember_me %></p>
 -->
 
+<!--
 <p>
   <label for="openid_url">OpenID URL</label><br/>
   <%= text_field_tag "openid_url" %>
 </p>
+-->
 
-<p><%= submit_tag 'Log in' %></p>
+<p><%= submit_tag t('.signin') %></p>
 <% end -%>
 
-<p>If you don't have an account yet,
-you can <%= link_to 'Sign Up', :controller => :users, :action => :new %>.
+<p><%= t('.signup_info') %><%= link_to t('.signup'), :controller => :users, :action => :new %>.
 </p>
-

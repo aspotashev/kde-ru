@@ -26,6 +26,6 @@
   <%= text_field :search, :string,
 	:onkeyup => "updateResults();", :onclick => "updateResults();",
 	:autocomplete => 'off', :size => 50, :value => params[:q] %>
-  <%= link_to 'link', { :controller => 'posearch', :action => 'index' }, :id => 'link-to-query' %>
+  <%= link_to t(:posearch_link), { :controller => 'posearch', :action => 'index' }, :id => 'link-to-query' %>
   <div class="auto_complete" id="search_string_auto_complete"></div>
 </p>
