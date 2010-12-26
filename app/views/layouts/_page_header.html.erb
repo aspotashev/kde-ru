@@ -4,7 +4,7 @@
     <ul>
     <% if logged_in? -%>
       <li id="logout-link" class="user-item">
-	<%= link_to "Log out", logout_path, { :title => t(:userbar_logout_desc), :class => 'user-link' } %>
+	<%= link_to t(:userbar_logout), logout_path, { :title => t(:userbar_logout_desc), :class => 'user-link' } %>
       </li>
       <li id="current-user-link" class="user-item">
 	<%= link_to_current_user :content_method => :login, :class => 'user-link' %>|
