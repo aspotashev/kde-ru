@@ -1,0 +1,58 @@
+
+:focus {
+  outline: 0;
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+  margin:0;
+  padding:0;
+}
+
+body { /* margins on the left and on the right of the webpage */
+  padding: 0px 20px 0px 20px;
+}
+
+#header {
+  position: relative;
+  display: block;
+  height: 25px;
+  margin: 0 -15px 8px -15px;
+}
+
+/* Links on the right side of the header */
+#user-links {
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  color: #ff7b73;
+  z-index: 0;
+}
+
+#user-links ul {
+  display: block;
+}
+
+#user-links .user-item {
+  float: right;
+  display: inline-block;
+  overflow: hidden;
+}
+
+#user-links .user-link {
+  display: inline-block;
+  line-height: 15px;
+  padding: 6px 7px 5px 5px;
+  font-size: 11px;
+  color: #111;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+#user-links .user-link:hover {
+  color: #755;
+  text-decoration: none;
+}
+
+#current-user-link .user-link {
+  font-weight: bold;
+}

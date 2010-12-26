@@ -1,10 +1,21 @@
-<% if logged_in? -%>
-  <table border="0"><tr>
-    <td><div id="user-bar-greeting">Logged in as <%= link_to_current_user :content_method => :login %></div></td>
-    <td><div id="user-bar-action"  >(<%= link_to "Log out", logout_path, { :title => "Log out" }    %>)</div></td>
-  </tr></table>
-<% else -%>
-  <div id="user-bar-greeting"><%= link_to_login_with_IP 'Not logged in', :style => 'border: none;' %></div>
-  <div id="user-bar-action"  ><%= link_to "Log in",  login_path,  { :title => "Log in" } %> /
-                               <%= link_to "Sign up", signup_path, { :title => "Create an account" } %></div>
-<% end -%>
+
+<div id="header">
+  <div id="user-links">
+      <% if logged_in? -%>
+	<li id="logout-link" class="user-item">
+	  <%= link_to "Log out", logout_path, { :title => "Log out", :class => 'user-link' } %>
+	</li>
+	<li id="current-user-link" class="user-item">
+	  <%= link_to_current_user :content_method => :login, :class => 'user-link' %>|
+	</li>
+      <% else -%>
+	<li id="login-link" class="user-item">
+	  <%= link_to "Log in",  login_path, { :title => "Log in", :class => 'user-link' } %>
+	</li>
+	<li id="signup-link" class="user-item">
+	  <%= link_to "Sign up", signup_path, { :title => "Create an account", :class => 'user-link' } %>|
+	</li>
+      <% end -%>
+    </ul>
+  </div>
+</div>
