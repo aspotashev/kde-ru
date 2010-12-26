@@ -56,3 +56,37 @@ body { /* margins on the left and on the right of the webpage */
 #current-user-link .user-link {
   font-weight: bold;
 }
+
+/* Links on the left side of the header */
+#sect-links {
+  position: absolute;
+  left: 15px;
+  top: 0px;
+  color: #ff7b73;
+  z-index: 0;
+}
+
+#sect-links ul {
+  display: block;
+}
+
+#sect-links .sect-item {
+  float: left;
+  display: inline-block;
+  overflow: hidden;
+}
+
+#sect-links .sect-link {
+  display: inline-block;
+  line-height: 15px;
+  padding: 6px 7px 5px 5px;
+  font-size: 11px;
+  color: #111;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+#sect-links .sect-link:hover {
+  color: #755;
+  text-decoration: none;
+}
