@@ -1,21 +1,22 @@
 
 <div id="header">
   <div id="user-links">
-      <% if logged_in? -%>
-	<li id="logout-link" class="user-item">
-	  <%= link_to "Log out", logout_path, { :title => t(:userbar_logout_desc), :class => 'user-link' } %>
-	</li>
-	<li id="current-user-link" class="user-item">
-	  <%= link_to_current_user :content_method => :login, :class => 'user-link' %>|
-	</li>
-      <% else -%>
-	<li id="login-link" class="user-item">
-	  <%= link_to t(:userbar_login),  login_path, { :title => t(:userbar_login_desc), :class => 'user-link' } %>
-	</li>
-	<li id="signup-link" class="user-item">
-	  <%= link_to t(:userbar_signup), signup_path, { :title => t(:userbar_signup_desc), :class => 'user-link' } %>|
-	</li>
-      <% end -%>
+    <ul>
+    <% if logged_in? -%>
+      <li id="logout-link" class="user-item">
+	<%= link_to "Log out", logout_path, { :title => t(:userbar_logout_desc), :class => 'user-link' } %>
+      </li>
+      <li id="current-user-link" class="user-item">
+	<%= link_to_current_user :content_method => :login, :class => 'user-link' %>|
+      </li>
+    <% else -%>
+      <li id="login-link" class="user-item">
+	<%= link_to t(:userbar_login),  login_path, { :title => t(:userbar_login_desc), :class => 'user-link' } %>
+      </li>
+      <li id="signup-link" class="user-item">
+	<%= link_to t(:userbar_signup), signup_path, { :title => t(:userbar_signup_desc), :class => 'user-link' } %>|
+      </li>
+    <% end -%>
     </ul>
   </div>
 </div>
