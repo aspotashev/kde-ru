@@ -7,7 +7,7 @@
         :controller => 'translation_file', :action => 'index',
         :id => content.translation_file.id %>
   (<%= link_to h(content.content.original_filename), content.content.url %>)</td>
-  <td><%= content.created_at %></td>
+  <td><%= I18n.l(content.created_at, :format => :short) %></td>
   <td><%= link_to_user(content.user) %></td>
   <td>size=<%= content.content.size %></td>
   <td>
