@@ -27,3 +27,6 @@ ru:
       signin: "Вход"
       signup_info: "Если у вас ещё нет учётной записи, вы можете "
       signup: "зарегистрироваться"
+  posearch:
+    index:
+      search_field_placeholder: "Поиск по переводам интерфейса"

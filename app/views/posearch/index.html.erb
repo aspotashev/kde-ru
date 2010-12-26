@@ -1,4 +1,7 @@
 <% content_for :head do %>
+  <%= javascript_include_tag 'http://img.artlebedev.ru/svalka/InputPlaceholder.js' %>
+  <%= stylesheet_link_tag 'posearch' %>
+
   <script type="text/javascript">
     function updateResults()
     {
@@ -17,6 +20,8 @@
 
     $(document).ready(function(){
       updateResults(); // necessary if there was a query in URL parameters
+      new InputPlaceholder (document.getElementById ('search_string'),
+	'<%= t('.search_field_placeholder') %>', '', 'posearch-field-empty');
     });
   </script>
 <% end %>

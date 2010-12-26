@@ -27,3 +27,6 @@ en:
       signin: "Log in"
       signup_info: "If you don't have an account yet, you can "
       signup: "Sign Up"
+  posearch:
+    index:
+      search_field_placeholder: "Search in GUI translations"
