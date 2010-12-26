@@ -21,7 +21,9 @@
     $(document).ready(function(){
       updateResults(); // necessary if there was a query in URL parameters
       new InputPlaceholder (document.getElementById ('search_string'),
-	'<%= t('.search_field_placeholder') %>', '', 'posearch-field-empty');
+	'<%= t('.search_field_placeholder') %>', 'posearch-field-text', 'posearch-field-empty');
+      $('input#search_string').addClass('posearch-field-text');
+      $('input#search_string').focus();
     });
   </script>
 <% end %>
