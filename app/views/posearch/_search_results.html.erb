@@ -1,3 +1,5 @@
+<% if @msgs %>
+
 <table border="1" width="99%">
   <% @msgs.each do |msg| %>
     <tr>
@@ -8,3 +10,7 @@
     </tr>
   <% end %>
 </table>
+
+<% else -%>
+  No results
+<% end -%>

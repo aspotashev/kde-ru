@@ -3,9 +3,14 @@ class PosearchController < ApplicationController
   end
 
   def auto_complete_request
-    search = params['text']
+    search = params['text'].to_s
 
-    message_ids = IndexSearch.request(search.to_s, 20) # pairs (filename, index)
+    if search.empty?
+      render :partial => 'search_results'
+      return
+    end
+
+    message_ids = IndexSearch.request(search, 20) # pairs (filename, index)
 #    message_ids = message_ids.map {|id| [id[0], id[1]] }.flatten
 
     @msgs = message_ids.map do |id|
