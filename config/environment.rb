@@ -43,4 +43,3 @@ Rails::Initializer.run do |config|
 end
 
 Workling::Remote.dispatcher = Workling::Remote::Runners::StarlingRunner.new
-

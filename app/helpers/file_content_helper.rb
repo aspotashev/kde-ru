@@ -2,6 +2,9 @@ module FileContentHelper
   private # helper methods are not controller actions!
 
   def posieve_check_rules_fill_cache(file_content)
+    FileContentsWorker.async_pology_check(:file_content_id => file_content.id)
+    return
+
     $po_backend.error_hook = lambda {|s| flash[:error] = s }
     if posieve = $po_backend.posieve
       res = posieve.check_rules(file_content.content.to_file.read)
@@ -24,11 +27,15 @@ module FileContentHelper
       posieve_check_rules_fill_cache(file_content)
     end
 
-    YAML.load(file_content.pology_errors_cache)
+    if file_content.pology_check_done?
+      YAML.load(file_content.pology_errors_cache)
+    else
+      nil
+    end
   end
 
   def posieve_check_rules_count(file_content)
-    if file_content.pology_errors_cache.nil? or file_content.pology_errors_cache.empty? or
+    if not file_content.pology_check_done? or
         file_content.updated_at < Time.now - 1.day # force update every day
       posieve_check_rules_fill_cache(file_content)
     end

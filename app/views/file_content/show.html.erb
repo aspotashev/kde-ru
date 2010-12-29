@@ -1,5 +1,11 @@
 <h2>This page describes the uploaded file '<%= @file.content.original_filename %>'</h2>
 
+<% if @errors.nil? %>
+
+<i><%= t('.not_checked_yet') %></i>
+
+<% else %>
+
 <% @errors.each do |err| %>
   <table border="1" width="99%">
     <tr>
@@ -33,3 +39,5 @@
     </tr>
   </table>
 <% end %>
+
+<% end -%>

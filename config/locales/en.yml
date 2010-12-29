@@ -30,3 +30,9 @@ en:
   posearch:
     index:
       search_field_placeholder: "Search in GUI translations"
+  file_content:
+    show:
+      not_checked_yet: "This translation file has not been checked yet.\
+        Please, reload this page in a few seconds.\
+        If the results do not appear in 3 minutes,\
+        report it to the administrator."
