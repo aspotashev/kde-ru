@@ -21,6 +21,11 @@ class FileContentController < ApplicationController
   def show
     @file = FileContent.find(params[:id])
     @errors = posieve_check_rules(@file)
+
+    if @errors.nil?
+      @errors = []
+      flash[:error] = "Could not obtain result of checking."
+    end
   end
 
   def delete
