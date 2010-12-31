@@ -23,7 +23,14 @@
         <%= h(err[:msgid].force_encoding('UTF-8')) %>
       </td>
       <td rowspan="2">
-        <%= h(err[:msgstr].force_encoding('UTF-8')) %>
+        <%=
+	  s = err[:msgstr].force_encoding('UTF-8')
+	  if err[:highlight].is_a?(Range) && err[:highlight].begin >= 0 && err[:highlight].end >= 0 && err[:highlight].begin <= s.length && err[:highlight].end <= s.length && err[:highlight].begin < err[:highlight].end
+	    h(s[0...err[:highlight].begin]) + '<b>' + h(s[err[:highlight]]) + '</b>' + h(s[err[:highlight].end..-1])
+	  else
+	    h(s)
+	  end
+        %>
       </td>
     </tr>
 
