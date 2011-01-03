@@ -29,6 +29,10 @@ class FileContent < ActiveRecord::Base
     end
   end
 
+  def pology_check_done?
+    (not pology_errors_cache.nil?) and (not pology_errors_cache.empty?)
+  end
+
   protected
     def validate_on_create
       # This solution looks bad, because it doesn't use Paperclip validates_attachment_*
