@@ -43,3 +43,4 @@ Rails::Initializer.run do |config|
 end
 
 Workling::Remote.dispatcher = Workling::Remote::Runners::StarlingRunner.new
+Paperclip::Attachment.default_options[:use_timestamp] = false
