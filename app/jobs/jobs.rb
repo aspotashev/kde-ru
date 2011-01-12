@@ -66,8 +66,6 @@ end
 
 
 job "pology_check" do |options|
-  puts "~~~~~~~~~~~~~~~ inside worker ~~~~~~~~~~~~~~~~~~"
-
   file_content = FileContent.find(options['file_content_id'])
   if not file_content.pology_check_done? or
     file_content.updated_at < Time.now - 1.day # force update every day
