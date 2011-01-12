@@ -42,5 +42,6 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-Workling::Remote.dispatcher = Workling::Remote::Runners::StarlingRunner.new
+require 'stalker'
+
 Paperclip::Attachment.default_options[:use_timestamp] = false

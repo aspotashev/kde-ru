@@ -2,8 +2,9 @@ module FileContentHelper
   private # helper methods are not controller actions!
 
   def posieve_check_rules_fill_cache(file_content)
-    FileContentsWorker.async_pology_check(:file_content_id => file_content.id)
+    Stalker.enqueue("pology_check", :file_content_id => file_content.id)
     return
+
 
     $po_backend.error_hook = lambda {|s| flash[:error] = s }
     if posieve = $po_backend.posieve
