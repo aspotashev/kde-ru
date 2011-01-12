@@ -16,13 +16,7 @@ God.watch do |w|
 
   w.restart_if do |restart|
     restart.condition(:memory_usage) do |c|
-      c.above = 50.megabytes
-      c.times = [3, 5]
-    end
-
-    restart.condition(:cpu_usage) do |c|
-      c.above = 50.percent
-      c.times = 5
+      c.above = 70.megabytes
     end
   end
 
