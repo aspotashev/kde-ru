@@ -35,7 +35,11 @@ class PoSieve
     `rm -f #{tempfile + '.po'}`
 
     parser = XML::Parser.string(xml)
-    doc = parser.parse
+    begin
+      doc = parser.parse
+    rescue LibXML::XML::Error => e
+      return nil
+    end
 
 
     res = doc.find('//error').map do |err|
@@ -73,6 +77,8 @@ job "pology_check" do |options|
       file_content.pology_errors_cache = res.to_yaml
       file_content.pology_errors_count_cache = res.size
       file_content.save!
+    else
+      # how to report an error now?
     end
   end
 end
