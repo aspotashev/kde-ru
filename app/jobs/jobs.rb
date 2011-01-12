@@ -72,7 +72,12 @@ job "pology_check" do |options|
   if not file_content.pology_check_done? or
     file_content.updated_at < Time.now - 1.day # force update every day
 
-    res = PoSieve.check_rules(file_content.content.to_file.read)
+    res = nil
+    begin
+      res = PoSieve.check_rules(file_content.content.to_file.read)
+    rescue Errno::ENOMEM => e
+    end
+
     if res
       file_content.pology_errors_cache = res.to_yaml
       file_content.pology_errors_count_cache = res.size
