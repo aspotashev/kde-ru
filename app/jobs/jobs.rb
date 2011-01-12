@@ -64,6 +64,12 @@ class PoSieve
   end
 end
 
+def report_error(s)
+  # TODO: what are the other ways to report an error?
+  File.open("/tmp/stalk-jobs.log", "w+") do |f|
+    f.puts s
+  end
+end
 
 job "pology_check" do |options|
   file_content = FileContent.find(options['file_content_id'])
@@ -74,6 +80,7 @@ job "pology_check" do |options|
     begin
       res = PoSieve.check_rules(file_content.content.to_file.read)
     rescue Errno::ENOMEM => e
+      report_error("Errno::ENOMEM")
     end
 
     if res
@@ -81,7 +88,7 @@ job "pology_check" do |options|
       file_content.pology_errors_count_cache = res.size
       file_content.save!
     else
-      # how to report an error now?
+      report_error("Errno::ENOMEM")
     end
   end
 end
