@@ -32,6 +32,21 @@ class PoSieve
     res[offset] || offset
   end
 
+  def self.check_gettext(content)
+    tempfile = get_tempfile
+    tempfile_po = tempfile + '.po'
+
+    File.open(tempfile_po, 'w') {|f| f.print content }
+    `msgfmt --check #{tempfile_po} -o - 2> #{tempfile} > /dev/null`
+
+    res = File.read(tempfile)
+
+    `rm -f #{tempfile}`
+    `rm -f #{tempfile_po}`
+
+    res.empty? ? nil : "'msgfmt --check' reported an error: " + res # 'nil' = no errors
+  end
+
   def self.check_rules(content)
     tempfile = get_tempfile
     File.open(tempfile + '.po', 'w') {|f| f.write(content) }
@@ -46,7 +61,7 @@ class PoSieve
       doc = parser.parse
     rescue LibXML::XML::Error => e
       report_error("LibXML::XML::Error -- #{tempfile + '.xml'}")
-      return nil
+      return "LibXML::XML::Error"
     end
 
 
@@ -77,21 +92,28 @@ job "pology_check" do |options|
   if not file_content.pology_check_done? or
     file_content.updated_at < Time.now - 1.day # force update every day
 
+    content_data = file_content.content.to_file.read
+
     res = nil
-    begin
-      res = PoSieve.check_rules(file_content.content.to_file.read)
-    rescue Errno::ENOMEM => e
-      report_error("Errno::ENOMEM")
+
+    res = PoSieve.check_gettext(content_data) # if res is not nil, then it is a String containing the error message
+
+    if res.nil? # if everything is still OK
+      begin
+	res = PoSieve.check_rules(content_data)
+      rescue Errno::ENOMEM => e
+	res = "Errno::ENOMEM"
+      end
     end
 
-    if res
-      file_content.pology_errors_cache = res.to_yaml
-      file_content.pology_errors_count_cache = res.size
-      file_content.save!
-      file_content.touch # force update of updated_at
-    else
-      report_error("res is nil")
+    if res.nil?
+      res = "res is still nil. We did not catch some type of error."
     end
+
+    file_content.pology_errors_cache = res.to_yaml
+    file_content.pology_errors_count_cache = res.size
+    file_content.save!
+    file_content.touch # force update of updated_at
   end
 end
 
