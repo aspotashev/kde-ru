@@ -88,7 +88,7 @@ job "pology_check" do |options|
       file_content.pology_errors_cache = res.to_yaml
       file_content.pology_errors_count_cache = res.size
       file_content.save!
-      file_content.update_attribute(:updated_at, Time.now) # force updated_at
+      file_content.touch # force update of updated_at
     else
       report_error("res is nil")
     end
