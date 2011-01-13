@@ -1,3 +1,12 @@
 This is the web application behind http://l10n.kde.ru/
 
-Это -- веб-приложение, работающее на домене http://l10n.kde.ru/
+
+'''Это -- веб-приложение, работающее на домене http://l10n.kde.ru/'''
+
+== Как запускать
+ god -c config/god.rb   # запуск монитора, поддерживающего работоспособность фоновых задач
+ ./script/server        # запуск сервера на localhost:3000
+
+== Поиск по файлам переводов
+Для поиска по файлам переводов нужен https://github.com/aspotashev/po-backend
+
