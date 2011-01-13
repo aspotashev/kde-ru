@@ -5,6 +5,13 @@ require 'xml' # gem install libxml-ruby
 
 $conf = YAML::load(File.open(File.join(File.dirname(__FILE__), 'config.yml')))
 
+def report_error(s)
+  # TODO: what are the other ways to report an error?
+  File.open("/tmp/stalk-jobs.log", "w+") do |f|
+    f.puts s
+  end
+end
+
 class PoSieve
   def self.get_tempfile
     '/tmp/po-backend-' + Time.now.to_i.to_s + rand.to_s
@@ -38,6 +45,7 @@ class PoSieve
     begin
       doc = parser.parse
     rescue LibXML::XML::Error => e
+      report_error("LibXML::XML::Error -- #{tempfile + '.xml'}")
       return nil
     end
 
@@ -64,13 +72,6 @@ class PoSieve
   end
 end
 
-def report_error(s)
-  # TODO: what are the other ways to report an error?
-  File.open("/tmp/stalk-jobs.log", "w+") do |f|
-    f.puts s
-  end
-end
-
 job "pology_check" do |options|
   file_content = FileContent.find(options['file_content_id'])
   if not file_content.pology_check_done? or
@@ -89,7 +90,7 @@ job "pology_check" do |options|
       file_content.save!
       file_content.update_attribute(:updated_at, Time.now) # force updated_at
     else
-      report_error("Errno::ENOMEM")
+      report_error("res is nil")
     end
   end
 end
