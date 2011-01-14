@@ -46,3 +46,12 @@ God.watch do |w|
 
   generic_monitoring(w, :memory_limit => 40.megabytes) # usually it takes 30 MB
 end
+
+God.watch do |w|
+  w.name = "beanstalkd"
+  w.interval = 1.hour
+  w.start = "beanstalkd"
+  w.log = "#{RAILS_ROOT}/log/beanstalkd.log"
+
+  generic_monitoring(w, :memory_limit => 5.megabytes)
+end
