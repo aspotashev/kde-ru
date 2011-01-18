@@ -4,7 +4,16 @@
 
 <i><%= t('.not_checked_yet') %></i>
 
-<% else %>
+<% elsif @errors.is_a?(String) %>
+
+<i><%= t('.failed_to_check') %></i>
+<p>
+  <pre>
+    <%= h(@errors) %>
+  </pre>
+</p>
+
+<% elsif @errors.is_a?(Array) %>
 
 <% @errors.each do |err| %>
   <table border="1" width="99%">
@@ -46,5 +55,7 @@
     </tr>
   </table>
 <% end %>
+
+<% else %>
 
 <% end -%>
