@@ -18,7 +18,7 @@
   </td>
   <td>
     <% if content.can_delete?(current_user) %>
-    <%= link_to 'delete', '/file_content/delete/' + content.id.to_s, :confirm => 'are you sure?', :method => :delete %>
+    <%= link_to t('.delete'), '/file_content/delete/' + content.id.to_s, :confirm => t('.delete_confirmation'), :method => :delete %>
     <% end %>
   </td>
 </tr>

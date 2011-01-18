@@ -111,6 +111,8 @@ ru:
       password: "Пароль"
       password_confirmation: "Подтверждение пароля"
       signup: "Создать учётную запись"
+    show:
+      list_of_users: "Список пользователей"
   sessions:
     new:
       login: "Имя пользователя"
@@ -122,9 +124,18 @@ ru:
   posearch:
     index:
       search_field_placeholder: "Поиск по переводам интерфейса"
+    search_results:
+      no_results: "Ничего не найдено"
   file_content:
     show:
       not_checked_yet: "Это файл перевода ещё не был проверен. \
         <b>Попробуйте обновить эту страницу через несколько секунд.</b> \
         Если результаты проверки не появляются в течение 3 минут, \
         сообщите об этом администратору."
+      failed_to_check: "Не удалось выполнить проверку файла."
+    list_file_contents:
+      delete: "удалить"
+      delete_confirmation: "Удалить загруженный файл перевода?"
+  translation_file:
+    index:
+      submit: "Отправить"

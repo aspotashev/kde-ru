@@ -1,6 +1,6 @@
 <h2>
   Homepage of user '<b><%= @user.login %>'</b>
 </h2>
-<%= link_to 'List of users', :controller => 'users', :action => 'list' %>
+<%= link_to t('.list_of_users'), :controller => 'users', :action => 'list' %>
 
 <%= render :partial => 'file_content/list_file_contents', :locals => { :list => @user.file_contents } %>
