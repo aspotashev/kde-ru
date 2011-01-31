@@ -32,4 +32,8 @@ class FileContent < ActiveRecord::Base
   def pology_check_done?
     (not pology_errors_cache.nil?) and (not pology_errors_cache.empty?)
   end
+
+  def read_content
+    content.to_file.read
+  end
 end

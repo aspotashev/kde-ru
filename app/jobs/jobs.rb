@@ -92,7 +92,7 @@ job "pology_check" do |options|
   if not file_content.pology_check_done? or
     file_content.updated_at < Time.now - 1.day # force update every day
 
-    content_data = file_content.content.to_file.read
+    content_data = file_content.read_content
 
     res = nil
 
