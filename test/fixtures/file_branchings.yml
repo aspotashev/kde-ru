@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  translation_branch_id: 1
+  translation_file_id: 1
+  file_content_id: 1
+
+two:
+  translation_branch_id: 1
+  translation_file_id: 1
+  file_content_id: 1

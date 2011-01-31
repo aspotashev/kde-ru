@@ -4,6 +4,9 @@
 class TranslationFile < ActiveRecord::Base
   has_many :file_contents
 
+  has_many :file_branchings
+  has_many :translation_branches, :through => :file_branchings
+
 # checks
   def is_locked?
     user_locked != -1

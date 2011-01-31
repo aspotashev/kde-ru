@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101219112424) do
+ActiveRecord::Schema.define(:version => 20110116231109) do
+
+  create_table "file_branchings", :force => true do |t|
+    t.integer  "translation_branch_id"
+    t.integer  "translation_file_id"
+    t.integer  "file_content_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "file_contents", :force => true do |t|
     t.integer  "user_id"
@@ -37,6 +45,12 @@ ActiveRecord::Schema.define(:version => 20101219112424) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "translation_branches", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "translation_files", :force => true do |t|
