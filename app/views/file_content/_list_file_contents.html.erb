@@ -39,7 +39,7 @@ list_in_groups = [
       :id => '3months', :allow_hide => true, :hide => true, :text => "Show content older than 3 months"},
 
     {:list => list.select {|x| x.created_at <  Time.now - 1.months and x.created_at >= Time.new - 3.months},
-      :id => '1_3months', :allow_hide => true, :hide => true, :text => "Show between 1 and 3 months old"},
+      :id => '1_3months', :allow_hide => true, :hide => true, :text => "Show content between 1 and 3 months old"},
 
     {:list => list.select {|x| x.created_at >= Time.new - 1.months}},
   ]
