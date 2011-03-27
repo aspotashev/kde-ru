@@ -1,8 +1,7 @@
 <p>
-<table border="0">
-<% list.each_with_index do |content,index| %>
+
+<% def render_row(content) %>
 <tr>
-  <td><%= index+1 %>.</td>
   <td><%= link_to h(content.translation_file.filename_with_path),
         :controller => 'translation_file', :action => 'index',
         :id => content.translation_file.id %>
@@ -22,6 +21,63 @@
     <% end %>
   </td>
 </tr>
-<% end %>
+<% end -%>
+
+<% def render_rows(list) %>
+  <table border="0">
+<%
+  list.each do |content|
+    render_row(content)
+  end
+%>
+  </table>
+<% end -%>
+
+<%
+list_in_groups = [
+    {:list => list.select {|x| x.created_at <  Time.now - 3.months},
+      :id => '3months', :allow_hide => true, :hide => true, :text => "Show content older than 3 months"},
+
+    {:list => list.select {|x| x.created_at <  Time.now - 1.months and x.created_at >= Time.new - 3.months},
+      :id => '1_3months', :allow_hide => true, :hide => true, :text => "Show between 1 and 3 months old"},
+
+    {:list => list.select {|x| x.created_at >= Time.new - 1.months}},
+  ]
+
+list_in_groups = list_in_groups.select {|x| x[:list].size > 0 } # remove empty groups
+
+if list_in_groups.size > 0
+  list_in_groups.last[:hide] = false
+end
+%>
+
+<table border="1" style="border-collapse: collapse; border-color: #bbb;">
+
+<% list_in_groups.each_with_index do |group, group_index| %>
+  <% if group_index != 0 %>
+    <tr style="height: 5px;">
+      <td style="border-color: #bbb; border-right: 0px;">
+      </td>
+    </tr>
+  <% end -%>
+
+  <tr>
+  <td style="border-color: #bbb;">
+    <% if group[:allow_hide] %>
+      <div align="center">
+        <a href="#" onclick="$('div#<%= group[:id] %>').toggle()">
+          <%= group[:text] %>
+        </a>
+      </div>
+    <% end -%>
+
+    <div id="<%= group[:id] %>" <%= group[:hide] ? 'style="display: none;"' : '' %>>
+      <% render_rows(group[:list]) %>
+    </div>
+  </td>
+  </tr>
+<% end -%>
 </table>
+
+
 </p>
