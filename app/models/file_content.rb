@@ -15,6 +15,9 @@ class FileContent < ActiveRecord::Base
 
   # TODO: if you are admin, you should be able to do everything
   def can_delete?(current_user)
+    raise "current_user == nil" if current_user.nil?
+    raise "user == nil" if user.nil?
+
     user.id == current_user.id && !current_user.anonymous?
   end
 

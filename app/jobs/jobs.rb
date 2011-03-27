@@ -117,3 +117,104 @@ job "pology_check" do |options|
   end
 end
 
+class FilenameInBranch < Struct.new(:base_dir, :filename)
+  def full_filename
+    base_dir + "/" + filename
+  end
+end
+
+class FilenameList < Array
+  attr_accessor :base_dir
+
+  def initialize(base)
+    @base_dir = base
+  end
+
+  def list_by_pattern(pattern)
+    `ls -1 #{@base_dir}/#{pattern}`.split("\n").map do |full_filename|
+      FilenameInBranch.new(base_dir, full_filename[(base_dir.size + 1)..-1])
+    end
+  end
+
+  # pattern: e.g. "*/*.po", relative to base_dir
+  def add_files(pattern)
+    concat(list_by_pattern(pattern)) # TODO: avoid using shell commands
+  end
+
+  def remove_files(pattern)
+    list_to_substract = list_by_pattern(pattern)
+    delete_if {|x| list_to_substract.include?(x) } # like "-" operation, but without creating new array
+  end
+
+  def plain_list
+    self.map(&:full_filename)
+  end
+end
+
+# Remove all data previously grabbed from KDE l10n repository.
+def remove_repository_data
+  # remove all FileContents "uploaded" by user "repository"
+  user_repository = User.find_by_login('repository')
+  user_repository.file_contents.each do |content|
+    content.delete(user_repository)
+  end
+
+  # TODO: how to simplify this by using ActiveRecord? (move "f.file_contents.size == 0" condition to SQL request)
+  TranslationFile.all_except_dump.select {|f| f.file_contents.size == 0 }.each {|f| f.delete }
+
+  FileBranching.delete_all
+  TranslationBranch.delete_all
+end
+
+def update_branch(options)
+  branch = TranslationBranch.create_by_name(options[:branch])
+
+  file_list = options[:files]
+  file_basename_list = file_list.map {|s| File.basename(s.filename) }
+  raise "Duplicate .po files (with same basenames): #{file_basename_list.uniq.select {|x| file_basename_list.count(x) > 1 }}" if file_basename_list.uniq.size != file_basename_list.size
+
+#  # Removed files
+#  (branch.translation_files.basename - file_basename_list).each do |filename|
+#  end
+
+  # Still existing and new files
+  file_list.each do |file|
+    tr_file = TranslationFile.create_by_name(file.filename)
+
+    existing = FileBranching.find(:first, :conditions => { :translation_file_id => tr_file.id, :translation_branch_id => branch.id })
+#    if existing.nil?
+#      # TODO: remove file_content from disk
+#    end
+
+    content = FileContent.create(:translation_file_id => tr_file.id, :user_id => -2) # user "repository"
+    content.save(false) # pre-create to occupy content.id
+    content_filename = "/system/contents/#{content.id}/original/#{File.basename(file.filename)}" # TODO: make paperclip or another plugin do this
+    content_filename_full = RAILS_ROOT + "/public" + content_filename
+    `mkdir -p #{File.dirname(content_filename_full)}`
+    `cp '#{file.full_filename}' '#{content_filename_full}'`
+    content.content_file_name = File.basename(content_filename)
+    content.content_content_type = 'text/x-gettext-translation'
+    content.content_file_size = File.size(content_filename_full)
+    content.content_updated_at = Time.now
+    content.save(false) # TODO: set user_id to something (not nil)
+
+    FileBranching.create(:translation_file_id => tr_file.id, :translation_branch_id => branch.id, :file_content_id => content.id)
+
+#    t.integer  "user_id"
+
+  end
+end
+
+# Run "update_branch" for all branches.
+job "update_branches" do |options|
+  remove_repository_data
+
+  # TODO: enqueue 4 branches: trunk, stable, koffice-trunk, koffice-stable
+
+  # TODO: how to pass the paths and mappings? (for clarification: we should rename, i.e. "map", some files from koffice/ to match filenames from calligra/)
+  file_list = FilenameList.new('/home/sasha/messages')
+#  file_list.add_files('*/*.po')
+#  file_list.remove_files('koffice/*.po')
+  file_list.add_files('kdelibs/*.po')
+  update_branch(:branch => 'trunk', :files => file_list)
+end

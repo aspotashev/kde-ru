@@ -46,4 +46,17 @@ class TranslationFile < ActiveRecord::Base
       lock(current_user.id) if can_lock?(current_user)  # TODO: raise exception or report error here?
     end
   end
+
+  def basename # TODO: replace filename_with_path with basename
+    File.basename(filename_with_path)
+  end
+
+  # create or return existing
+  def self.create_by_name(s)
+    find_by_filename_with_path(s) or create(:filename_with_path => s)
+  end
+
+  def self.all_except_dump
+    find(:all, :conditions => [ "filename_with_path <> ?", '<DUMP>' ])
+  end
 end

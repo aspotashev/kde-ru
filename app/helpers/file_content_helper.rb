@@ -22,7 +22,7 @@ module FileContentHelper
 
   def posieve_check_rules_count(file_content)
     if not file_content.pology_check_done? or
-        file_content.updated_at < Time.now - 1.day # force update every day
+        file_content.updated_at < Time.now - 1.day # force update every day (FIXME)
       posieve_check_rules_fill_cache(file_content)
     end
 
