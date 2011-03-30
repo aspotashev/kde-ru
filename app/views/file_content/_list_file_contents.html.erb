@@ -1,3 +1,14 @@
+<script language="javascript">
+function slide_toggle(id)
+{
+  if ($(id + ":first").is(":hidden")) {
+    $(id).slideDown("normal");
+  } else {
+    $(id).slideUp("normal");
+  }
+}
+</script>
+
 <p>
 
 <% def render_row(content) %>
@@ -65,7 +76,7 @@ end
   <td style="border-color: #bbb;">
     <% if group[:allow_hide] %>
       <div align="center">
-        <a href="#" onclick="$('div#<%= group[:id] %>').toggle()">
+        <a href="#" onclick="slide_toggle('div#<%= group[:id] %>')">
           <%= group[:text] %>
         </a>
       </div>
