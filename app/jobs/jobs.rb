@@ -44,7 +44,7 @@ class PoSieve
     `rm -f #{tempfile}`
     `rm -f #{tempfile_po}`
 
-    res.empty? ? nil : "'msgfmt --check' reported an error: " + res # 'nil' = no errors
+    res.empty? ? nil : "'msgfmt --check' reported an error:\n" + res # 'nil' = no errors
   end
 
   def self.check_rules(content)
@@ -96,18 +96,19 @@ job "pology_check" do |options|
 
     res = nil
 
-    res = PoSieve.check_gettext(content_data) # if res is not nil, then it is a String containing the error message
-
-    if res.nil? # if everything is still OK
-      begin
-	res = PoSieve.check_rules(content_data)
-      rescue Errno::ENOMEM => e
-	res = "Errno::ENOMEM"
-      end
+    begin
+      res = PoSieve.check_rules(content_data)
+    rescue Errno::ENOMEM => e
+      res = "Errno::ENOMEM"
     end
 
     if res.nil?
       res = "res is still nil. We did not catch some type of error."
+    end
+
+    gettext_error = PoSieve.check_gettext(content_data) # if gettext_error is not nil, then it is a String containing the error message
+    if gettext_error.is_a?(String)
+      res.unshift({ :gettext_error => gettext_error })
     end
 
     file_content.pology_errors_cache = res.to_yaml
