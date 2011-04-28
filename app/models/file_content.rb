@@ -39,7 +39,6 @@ class FileContent < ActiveRecord::Base
     content.to_file.read
   end
 
-private
   def force_delete
     destroy_attached_files # delete attachments (files from disk)
     destroy # remove record from database
