@@ -24,8 +24,7 @@ class FileContent < ActiveRecord::Base
   # TODO: allow only "delete" HTTP method
   def delete(current_user)
     if can_delete?(current_user)
-      destroy_attached_files # delete attachments (files from disk)
-      destroy # remove record from database
+      force_delete
     else
       errors.add_to_base("you are not allowed to remove this FileContent")
       raise "you are not allowed to remove this FileContent"
@@ -38,5 +37,11 @@ class FileContent < ActiveRecord::Base
 
   def read_content
     content.to_file.read
+  end
+
+private
+  def force_delete
+    destroy_attached_files # delete attachments (files from disk)
+    destroy # remove record from database
   end
 end
