@@ -119,11 +119,11 @@ job "pology_check" do |options|
 end
 
 job "deliver_signup_notification" do |options|
-  UserMailer.deliver_signup_notification(User.find(options[:user_id]))
+  UserMailer.deliver_signup_notification(User.find(options['user_id']))
 end
 
 job "deliver_activation" do |options|
-  UserMailer.deliver_activation(User.find(options[:user_id]))
+  UserMailer.deliver_activation(User.find(options['user_id']))
 end
 
 class FilenameInBranch < Struct.new(:base_dir, :filename)
