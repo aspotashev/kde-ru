@@ -39,15 +39,6 @@ God.watch do |w|
 end
 
 God.watch do |w|
-  w.name = "po-backend-drb"
-  w.interval = 30.seconds
-  w.start = "#{RAILS_ROOT}/vendor/po-backend/server.rb"
-  w.log = "#{RAILS_ROOT}/log/po-backend.log"
-
-  generic_monitoring(w, :memory_limit => 40.megabytes) # usually it takes 30 MB
-end
-
-God.watch do |w|
   w.name = "beanstalkd"
   w.interval = 1.hour
   w.start = "beanstalkd"
