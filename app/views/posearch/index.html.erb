@@ -1,38 +1,3 @@
-<% content_for :head do %>
-  <%= javascript_include_tag 'InputPlaceholder' %>
-  <%= stylesheet_link_tag 'posearch' %>
-
-  <script type="text/javascript">
-    function updateResults()
-    {
-      requested = $("input#search_string").val();
-      if (requested == '')
-	return;
-
-      $("a#link-to-query").attr("href", '<%= url_for :controller => 'posearch', :q => '' %>' + encodeURIComponent(requested));
-      $.get('/posearch/auto_complete_request', { 'text': $("input#search_string").val() }, function(data){
-	  if (requested == $("input#search_string").val()) // check if the results are still relevant
-	  {
-	    $("div#search_string_auto_complete").html(data);
-	  }
-	});
-    }
-
-    $(document).ready(function(){
-      updateResults(); // necessary if there was a query in URL parameters
-      new InputPlaceholder (document.getElementById ('search_string'),
-	'<%= t('.search_field_placeholder') %>', 'posearch-field-text', 'posearch-field-empty');
-      $('input#search_string').addClass('posearch-field-text');
-      $('input#search_string').focus();
-    });
-  </script>
-<% end %>
-
-
 <p>
-  <%= text_field :search, :string,
-	:onkeyup => "updateResults();", :onclick => "updateResults();",
-	:autocomplete => 'off', :size => 50, :value => params[:q] %>
-  <%= link_to t(:posearch_link), { :controller => 'posearch', :action => 'index' }, :id => 'link-to-query' %>
-  <div class="auto_complete" id="search_string_auto_complete"></div>
+  Posearch closed due to uselessness. Use search in translation memory in Lokalize.
 </p>
