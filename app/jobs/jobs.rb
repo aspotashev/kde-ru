@@ -123,6 +123,13 @@ job "invalidate_all_pology_errors" do |options|
   # TODO: start regenerating Pology errors right after this
 end
 
+job "update_pology_rules" do |options|
+  output = `cd ~/kde-svn/pology ; svn up`.strip
+  if not output.match(/^At revision [0-9]+\.$/)
+    Stalker.enqueue("invalidate_all_pology_errors")
+  end
+end
+
 job "deliver_signup_notification" do |options|
   UserMailer.deliver_signup_notification(User.find(options['user_id']))
 end
