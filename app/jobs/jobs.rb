@@ -126,6 +126,9 @@ end
 job "update_pology_rules" do |options|
   output = `cd ~/kde-svn/pology ; svn up`.strip
   if not output.match(/^At revision [0-9]+\.$/)
+    # The rules have changed, the cache has become invalid
+    `rm -rf ~/.pology-check_rules-cache/`
+
     Stalker.enqueue("invalidate_all_pology_errors")
   end
 end
