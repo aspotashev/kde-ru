@@ -36,8 +36,8 @@ class FileContent < ActiveRecord::Base
   end
 
   def delete_pology_errors_cache
-    pology_errors_cache = nil
-    pology_errors_count_cache = nil
+    self.pology_errors_cache = nil
+    self.pology_errors_count_cache = nil
     save!
   end
 
