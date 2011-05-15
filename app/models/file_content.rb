@@ -35,6 +35,18 @@ class FileContent < ActiveRecord::Base
     (not pology_errors_cache.nil?) and (not pology_errors_cache.empty?)
   end
 
+  def delete_pology_errors_cache
+    pology_errors_cache = nil
+    pology_errors_count_cache = nil
+    save!
+  end
+
+  def self.invalidate_all_pology_errors
+    FileContent.find(:all).each do |file_content|
+      file_content.delete_pology_errors_cache
+    end
+  end
+
   def read_content
     content.to_file.read
   end

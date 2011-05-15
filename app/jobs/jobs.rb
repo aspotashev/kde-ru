@@ -118,6 +118,11 @@ job "pology_check" do |options|
   end
 end
 
+job "invalidate_all_pology_errors" do |options|
+  FileContent.invalidate_all_pology_errors
+  # TODO: start regenerating Pology errors right after this
+end
+
 job "deliver_signup_notification" do |options|
   UserMailer.deliver_signup_notification(User.find(options['user_id']))
 end
