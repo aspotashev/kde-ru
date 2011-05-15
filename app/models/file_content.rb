@@ -42,8 +42,8 @@ class FileContent < ActiveRecord::Base
   end
 
   def self.invalidate_all_pology_errors
-    FileContent.find(:all).each do |file_content|
-      file_content.delete_pology_errors_cache
+    FileContent.find(:all).map {|x| x.id }.each do |id|
+      FileContent.find(id).delete_pology_errors_cache
     end
   end
 
