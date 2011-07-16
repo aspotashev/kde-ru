@@ -205,11 +205,6 @@ def update_branch(options)
   file_list.each do |file|
     tr_file = TranslationFile.create_by_name(file.filename) # e.g. "kdelibs/desktop_kdelibs.po"
 
-#    existing = FileBranching.find(:first, :conditions => { :translation_file_id => tr_file.id, :translation_branch_id => branch.id })
-#    if existing.nil?
-#      # TODO: remove file_content from disk
-#    end
-
     content_props = { :translation_file_id => tr_file.id, :user_id => -2, :translation_branch_id => branch.id } # user "repository"
     content = FileContent.find(:first, :conditions => content_props)
     if content.nil?
@@ -226,11 +221,6 @@ def update_branch(options)
     content.content_file_size = File.size(content_filename_full)
     content.content_updated_at = Time.now
     content.save(false) # TODO: set user_id to something (not nil)
-
-    #FileBranching.create(:translation_file_id => tr_file.id, :translation_branch_id => branch.id, :file_content_id => content.id)
-
-#    t.integer  "user_id"
-
   end
 end
 
