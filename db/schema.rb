@@ -9,15 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110116231109) do
-
-  create_table "file_branchings", :force => true do |t|
-    t.integer  "translation_branch_id"
-    t.integer  "translation_file_id"
-    t.integer  "file_content_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20110715220836) do
 
   create_table "file_contents", :force => true do |t|
     t.integer  "user_id"
@@ -30,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20110116231109) do
     t.datetime "content_updated_at"
     t.text     "pology_errors_cache"
     t.integer  "pology_errors_count_cache"
+    t.integer  "translation_branch_id",     :default => -1
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|

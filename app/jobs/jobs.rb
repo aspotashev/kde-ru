@@ -178,24 +178,24 @@ end
 # Remove all data previously grabbed from KDE l10n repository.
 def remove_repository_data
   # remove all FileContents "uploaded" by user "repository"
-  user_repository = User.find_by_login('repository')
-  user_repository.file_contents.each do |content|
-    content.delete(user_repository)
-  end
+  #user_repository = User.find_by_login('repository')
+  #user_repository.file_contents.each do |content|
+  #  content.delete(user_repository)
+  #end
 
   # TODO: how to simplify this by using ActiveRecord? (move "f.file_contents.size == 0" condition to SQL request)
-  TranslationFile.all_except_dump.select {|f| f.file_contents.size == 0 }.each {|f| f.delete }
+  #TranslationFile.all_except_dump.select {|f| f.file_contents.size == 0 }.each {|f| f.delete }
 
-  FileBranching.delete_all
-  TranslationBranch.delete_all
+  #FileBranching.delete_all
+  #TranslationBranch.delete_all
 end
 
 def update_branch(options)
   branch = TranslationBranch.create_by_name(options[:branch])
 
   file_list = options[:files]
-  file_basename_list = file_list.map {|s| File.basename(s.filename) }
-  raise "Duplicate .po files (with same basenames): #{file_basename_list.uniq.select {|x| file_basename_list.count(x) > 1 }}" if file_basename_list.uniq.size != file_basename_list.size
+  #file_basename_list = file_list.map {|s| File.basename(s.filename) }
+  #raise "Duplicate .po files (with same basenames): #{file_basename_list.uniq.select {|x| file_basename_list.count(x) > 1 }}" if file_basename_list.uniq.size != file_basename_list.size
 
 #  # Removed files
 #  (branch.translation_files.basename - file_basename_list).each do |filename|
@@ -203,15 +203,20 @@ def update_branch(options)
 
   # Still existing and new files
   file_list.each do |file|
-    tr_file = TranslationFile.create_by_name(file.filename)
+    tr_file = TranslationFile.create_by_name(file.filename) # e.g. "kdelibs/desktop_kdelibs.po"
 
-    existing = FileBranching.find(:first, :conditions => { :translation_file_id => tr_file.id, :translation_branch_id => branch.id })
+#    existing = FileBranching.find(:first, :conditions => { :translation_file_id => tr_file.id, :translation_branch_id => branch.id })
 #    if existing.nil?
 #      # TODO: remove file_content from disk
 #    end
 
-    content = FileContent.create(:translation_file_id => tr_file.id, :user_id => -2) # user "repository"
-    content.save(false) # pre-create to occupy content.id
+    content_props = { :translation_file_id => tr_file.id, :user_id => -2, :translation_branch_id => branch.id } # user "repository"
+    content = FileContent.find(:first, :conditions => content_props)
+    if content.nil?
+      content = FileContent.create(content_props)
+      content.save(false) # pre-create to occupy content.id
+    end
+
     content_filename = "/system/contents/#{content.id}/original/#{File.basename(file.filename)}" # TODO: make paperclip or another plugin do this
     content_filename_full = RAILS_ROOT + "/public" + content_filename
     `mkdir -p #{File.dirname(content_filename_full)}`
@@ -222,7 +227,7 @@ def update_branch(options)
     content.content_updated_at = Time.now
     content.save(false) # TODO: set user_id to something (not nil)
 
-    FileBranching.create(:translation_file_id => tr_file.id, :translation_branch_id => branch.id, :file_content_id => content.id)
+    #FileBranching.create(:translation_file_id => tr_file.id, :translation_branch_id => branch.id, :file_content_id => content.id)
 
 #    t.integer  "user_id"
 
@@ -233,12 +238,11 @@ end
 job "update_branches" do |options|
   remove_repository_data
 
-  # TODO: enqueue 4 branches: trunk, stable, koffice-trunk, koffice-stable
-
-  # TODO: how to pass the paths and mappings? (for clarification: we should rename, i.e. "map", some files from koffice/ to match filenames from calligra/)
   file_list = FilenameList.new('/home/sasha/messages')
-#  file_list.add_files('*/*.po')
-#  file_list.remove_files('koffice/*.po')
-  file_list.add_files('kdelibs/*.po')
+  file_list.add_files('*/*.po')
   update_branch(:branch => 'trunk', :files => file_list)
+
+  file_list = FilenameList.new('/home/sasha/stable-messages')
+  file_list.add_files('*/*.po')
+  update_branch(:branch => 'stable', :files => file_list)
 end
