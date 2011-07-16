@@ -8,15 +8,12 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
   padding:0;
 }
 
-body { /* margins on the left and on the right of the webpage */
-  padding: 0px 20px 0px 20px;
-}
-
 #header {
   position: relative;
   display: block;
   height: 25px;
-  margin: 0 -15px 8px -15px;
+  /*margin: 0 -15px 8px -15px;*/
+  padding: 0px 20px 0px 20px;
 }
 
 /* Links on the right side of the header */

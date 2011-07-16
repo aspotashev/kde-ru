@@ -1,80 +1,33 @@
 <% content_for :title, "List of translation files" %>
 
-<% content_for :head do %>
-  <script type="text/javascript">
 
-    function onUploadSubmit(id) {
-      $("uploadForm").attr("action", 'ajax_upload/' + $("form.uploadForm").attr("id").substr(1));
-      $("uploadForm").attr("method", "POST");
-      $("uploadForm").attr("target", "uploadForm");
-      $("uploadForm").submit();
+<%
+category_list = [
+    ['extragear-games', 'sidebar-item-1 sidebar-selected'],
+    ['extragear-multimedia', 'sidebar-item-1'],
+    ['kdebase', 'sidebar-item-2'],
+    ['kdelibs', 'sidebar-item-2'],
+    ['playground-pim', 'sidebar-item-3'],
+]
+%>
 
-      $.post('ajax_upload/' + $("form.uploadForm").attr("id").substr(1), function(data){
-	//alert("456");
-	//$("div.upload-overlay").append('done');
-
-	$("div.upload-overlay").css("visibility", "hidden");
-      }, {}, {}, 'html');
-    }
-
-    function onUploadCancel() {
-      $("div.upload-overlay").css("visibility", "hidden");
-    }
-
-    $(document).ready(function(){
-
-
-//      $("table").delegate("a", "click", function(){
-      $("a.ajax_lock").live("click", function(){ // people say that "live" fails on some browsers
-	clicked_link_id = $(this).attr('id');
-	$.post('ajax_lock_pofile/' + clicked_link_id.substr(1), function(data){
-	  $("tr.ajax_lock_div#" + clicked_link_id).html(data);
-	}, {}, {}, 'html');
-      });
-
-//      $("a.ajax_lock").click(function(){
-//	clicked_link_id = $(this).attr('id');
-//	$.post('ajax_lock_pofile/' + clicked_link_id.substr(1), function(data){
-//	  $("tr.ajax_lock_div#" + clicked_link_id).html(data);
-//	}, {}, {}, 'html');
-//      });
-
-      function uploadDialog(uploadButton, id) {
-	$("form.uploadForm").attr("id", id);
-
-	overlay = $("div.upload-overlay");
-	overlay.css("visibility","visible");
-	overlay.css("width", window.innerWidth + 'px');
-	overlay.css("height", window.innerHeight + 'px');
-      }
-
-      $("a.js_upload").live("click", function(){
-	uploadDialog(this, $(this).attr('id'));
-      });
-
-    });
-  </script>
-
-  <style type="text/css">
-    .upload-overlay {
-      position:fixed;
-      top:0;
-      left:0;
-      background:#141414;
-      opacity:0.8;
-      visibility:hidden;
-    }
-  </style>
-<% end %>
-
-<table border=1>
-<% @files.each do |file| %>
-  <% content_tag :tr, :class => "ajax_lock_div", :id => 'a' + file.id.to_s do -%>
-    <%= render :partial => 'div_po_locking', :locals => { :file => file } %>
-  <% end -%>
-<% end %>
-</table>
-
-<div class="upload-overlay">
-  <%= render :partial => "upload_overlay" %>
+<div class="h-sidebar">
+  <% category_list.each do |category| %>
+    <a href="#">
+      <div class="<%= category[1] %>">
+        <%= category[0].sub(/^extragear-/, 'exgr-').sub(/^playground-/, 'plgr-') %>
+      </div>
+    </a>
+  <% end %>
 </div>
+
+<div class="central-thing">
+  <table border=1>
+  <% @files.each do |file| %>
+    <% content_tag :tr, :class => "ajax_lock_div", :id => 'a' + file.id.to_s do -%>
+      <%= render :partial => 'div_po_locking', :locals => { :file => file } %>
+    <% end -%>
+  <% end %>
+  </table>
+</div>
+

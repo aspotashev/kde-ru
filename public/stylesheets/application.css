@@ -1,3 +1,7 @@
+body {
+  background-color: #ebffe6
+}
+
 div.flash_error {
   padding: 3px 5px;
   font-weight: bold;
@@ -16,4 +20,55 @@ div.flash_notice {
   border-top: solid 1px #6f6;
   border-bottom: solid 1px #6f6;
   border-right: solid 1px #6f6;
+}
+
+div.h-sidebar a:link {
+  text-decoration: none;
+  color: white;
+}
+
+div.h-sidebar a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+div.h-sidebar a:active {
+  text-decoration: none;
+  color: white;
+}
+
+div.h-sidebar {
+  color: white;
+  font-weight: bold;
+
+  padding-top: 20px;
+  position: absolute;
+  margin: 0px 8px;
+  width: 160px;
+}
+
+div.sidebar-item-1 {
+  padding: 5px 5px;
+  margin: 5px 0px;
+  background-color: #8080ff;
+}
+
+div.sidebar-item-2 {
+  padding: 5px 5px;
+  margin: 5px 0px;
+  background-color: #0b85ff;
+}
+
+div.sidebar-item-3 {
+  padding: 5px 5px;
+  margin: 5px 0px;
+  background-color: #b3b35a;
+}
+
+div.sidebar-selected {
+  width: 166px;
+}
+
+div.central-thing {
+  padding-left: 185px;
 }
