@@ -1,13 +1,16 @@
 <td><%= link_to h(file.filename_with_path), :controller => 'translation_file', :action => 'index', :id => file.id %></td>
 
-<!--
+<% if file.filename_with_path != '<DUMP>' %>
+
 <td>
     <%=
-      if file.can_lock?(current_user) or file.can_unlock?(current_user)
-	link_to file.can_lock?(current_user) ? 'Lock' : 'Unlock', '#',
+      if file.can_toggle_locking?(current_user)
+	link_to file.is_locked? ? 'Unlock' : 'Lock', '#',
 	  :id => 'a' + file.id.to_s, :class => 'ajax_lock'
-      else
+      elsif not current_user.anonymous?
 	h("Locked by " + User.find(file.user_locked).login)
+      else # not locked, but cannot lock anonymously
+        "You need to log in"
       end
     %>
 </td>
@@ -15,10 +18,11 @@
 <td>
   <%=
     owner = User.find_by_id_or_nil(file.user_locked)
-    h(owner.login) if owner
+    (owner && owner.id > 0) ? '<b>' + h(owner.login) + '</b>' : "<i>Become the maintainer!</i>"
   %>
 </td>
 
+<!--
 <td>
   <%=
     link_to 'Upload', '#',
@@ -26,3 +30,5 @@
   %>
 </td>
 -->
+
+<% end %>

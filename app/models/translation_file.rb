@@ -19,11 +19,15 @@ class TranslationFile < ActiveRecord::Base
   
   # TODO: if you are admin, you should be able to do everything
   def can_lock?(current_user)
+    return false if current_user.anonymous?
+
     not is_locked?
   end
-  
+
   # TODO: if you are admin, you should be able to do everything
   def can_unlock?(current_user)
+    return false if current_user.anonymous?
+
     is_locked? and not is_locked_by_other?(current_user)
   end
 
@@ -38,12 +42,19 @@ class TranslationFile < ActiveRecord::Base
     save!
   end
 
+  def can_toggle_locking?(current_user)
+    if is_locked?
+      can_unlock?(current_user)
+    else
+      can_lock?(current_user)
+    end
+  end
+
   # lock if unlocked, unlock if locked
   def toggle_locking(current_user)
-    if is_locked?
-      unlock if can_unlock?(current_user)  # TODO: raise exception or report error here?
-    else
-      lock(current_user.id) if can_lock?(current_user)  # TODO: raise exception or report error here?
+    if can_toggle_locking?(current_user)
+      p 'CAN TOGGLE'
+      is_locked? ? unlock : lock(current_user.id) # TODO: raise exception or report error here?
     end
   end
 
@@ -59,4 +70,5 @@ class TranslationFile < ActiveRecord::Base
   def self.all_except_dump
     find(:all, :conditions => [ "filename_with_path <> ?", '<DUMP>' ])
   end
+
 end
