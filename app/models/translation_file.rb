@@ -53,7 +53,6 @@ class TranslationFile < ActiveRecord::Base
   # lock if unlocked, unlock if locked
   def toggle_locking(current_user)
     if can_toggle_locking?(current_user)
-      p 'CAN TOGGLE'
       is_locked? ? unlock : lock(current_user.id) # TODO: raise exception or report error here?
     end
   end
