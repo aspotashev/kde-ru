@@ -23,7 +23,7 @@
 </td>
 
 <td>
-  <%= file.file_contents.map {|x| posieve_check_rules_count(x) }.max %>
+  <%= file.file_contents.map {|x| posieve_check_rules_count(x) }.compact.max %>
 </td>
 
 <!--
