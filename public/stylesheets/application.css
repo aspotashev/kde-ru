@@ -42,7 +42,7 @@ div.h-sidebar {
   font-weight: bold;
 
   padding-top: 20px;
-  position: absolute;
+  position: fixed;
   margin: 0px 8px;
   width: 160px;
 }
@@ -70,7 +70,7 @@ div.sidebar-selected {
 }
 
 div.list-left-line {
-  position: absolute;
+  position: fixed;
   left: 173px;
   top: 45px;
   bottom: 5px;
@@ -82,3 +82,4 @@ div.list-left-line {
 div.central-thing {
   padding-left: 185px;
 }
+

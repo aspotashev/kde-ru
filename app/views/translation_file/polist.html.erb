@@ -1,28 +1,19 @@
 <% content_for :title, "List of translation files" %>
 
 
-<%
-category_list = [
-    ['extragear-games', 'sidebar-item-1 sidebar-selected'],
-    ['extragear-multimedia', 'sidebar-item-1'],
-    ['kdebase', 'sidebar-item-2'],
-    ['kdelibs', 'sidebar-item-2'],
-    ['playground-pim', 'sidebar-item-3'],
-]
-%>
-
 <div class="h-sidebar">
-  <% category_list.each do |category| %>
-    <a href="#">
+  <% @category_list.to_a.each do |category| %>
+    <% link_to :id => category[0] do %>
       <div class="<%= category[1] %>">
         <%= category[0].sub(/^extragear-/, 'exgr-').sub(/^playground-/, 'plgr-') %>
       </div>
-    </a>
+    <% end %>
   <% end %>
 </div>
 
 <div class="list-left-line"></div>
 
+<% if @files and not @files.empty? %>
 <div class="central-thing">
   <table border=1>
   <% @files.each do |file| %>
@@ -32,4 +23,4 @@ category_list = [
   <% end %>
   </table>
 </div>
-
+<% end %>
