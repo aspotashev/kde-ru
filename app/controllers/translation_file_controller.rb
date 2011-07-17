@@ -6,17 +6,23 @@ class TranslationFileController < ApplicationController
   end
 
   def polist
-    @category_list = {
-      'extragear-games' => 'sidebar-item-1',
-      'extragear-multimedia' => 'sidebar-item-1',
-      'kdebase' => 'sidebar-item-2',
-      'kdelibs' => 'sidebar-item-2',
-      'playground-pim' => 'sidebar-item-3',
-    }
+    @category_list = {}
+    TranslationFile.find(:all, :conditions => ['NOT filename_with_path LIKE ?', '<DUMP>']).
+      map(&:filename_with_path).map {|x| x.sub(/\/.*$/, '') }.uniq.each do |cat|
+
+      @category_list[cat] = 'sidebar-item-2' # by default
+      if cat =~ /^(extragear-|calligra|koffice|others|www)/
+        @category_list[cat] = 'sidebar-item-1'
+      elsif cat =~ /^(playground-)/
+        @category_list[cat] = 'sidebar-item-3'
+      end
+    end
 
     @selected_cat = params[:id] if @category_list.has_key?(params[:id])
+    @category_list = @category_list.to_a.sort_by {|x| x.reverse }
+
     if @selected_cat
-      @category_list[@selected_cat] += ' sidebar-selected'
+      @category_list.select {|x| x[0] == @selected_cat }[0][1] += ' sidebar-selected'
 
       # TODO: filter only files with moved_to=-1
       @files = TranslationFile.find(:all, :conditions => ['filename_with_path LIKE ?', @selected_cat + '/%'])

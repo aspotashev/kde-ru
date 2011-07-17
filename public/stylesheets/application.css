@@ -42,26 +42,27 @@ div.h-sidebar {
   font-weight: bold;
 
   padding-top: 20px;
-  position: fixed;
+  padding-bottom: 20px;
+  position: absolute; /*fixed;*/
   margin: 0px 8px;
   width: 160px;
 }
 
 div.sidebar-item-1 {
-  padding: 5px 5px;
-  margin: 5px 0px;
+  padding: 1px 5px;
+  margin: 2px 0px;
   background-color: #8080ff;
 }
 
 div.sidebar-item-2 {
-  padding: 5px 5px;
-  margin: 5px 0px;
+  padding: 1px 5px;
+  margin: 2px 0px;
   background-color: #0b85ff;
 }
 
 div.sidebar-item-3 {
-  padding: 5px 5px;
-  margin: 5px 0px;
+  padding: 1px 5px;
+  margin: 2px 0px;
   background-color: #b3b35a;
 }
 

@@ -2,7 +2,7 @@
 
 
 <div class="h-sidebar">
-  <% @category_list.to_a.each do |category| %>
+  <% @category_list.each do |category| %>
     <% link_to :id => category[0] do %>
       <div class="<%= category[1] %>">
         <%= category[0].sub(/^extragear-/, 'exgr-').sub(/^playground-/, 'plgr-') %>
