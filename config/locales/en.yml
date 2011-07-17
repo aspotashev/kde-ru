@@ -4,6 +4,7 @@
 en:
   sect_home: "Main Page"
   sect_posearch: "GUI Translation Search"
+  sect_polist: "All files"
   posearch_link: "link"
   userbar_logout: "Log out"
   userbar_logout_desc: "Log out"

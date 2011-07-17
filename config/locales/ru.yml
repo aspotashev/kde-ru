@@ -95,6 +95,7 @@ ru:
 
   sect_home: "Главная"
   sect_posearch: "Поиск по переводам интерфейса"
+  sect_polist: "Все файлы"
   sect_sources: "Исходный код сайта"
   posearch_link: "ссылка"
   userbar_logout: "Выход"
