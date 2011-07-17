@@ -228,11 +228,11 @@ end
 job "update_branches" do |options|
   remove_repository_data
 
-  file_list = FilenameList.new('/home/sasha/messages')
+  file_list = FilenameList.new('~/messages')
   file_list.add_files('*/*.po')
   update_branch(:branch => 'trunk', :files => file_list)
 
-  file_list = FilenameList.new('/home/sasha/stable-messages')
+  file_list = FilenameList.new('~/stable-messages')
   file_list.add_files('*/*.po')
   update_branch(:branch => 'stable', :files => file_list)
 end
