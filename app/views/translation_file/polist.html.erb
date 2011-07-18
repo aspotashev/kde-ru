@@ -1,6 +1,7 @@
 <% content_for :title, "List of translation files" %>
 
 
+<% cache 'po-dirs-sidebar' do %>
 <div class="h-sidebar">
   <% @category_list.each do |category| %>
     <% link_to :id => category[0] do %>
@@ -10,6 +11,7 @@
     <% end %>
   <% end %>
 </div>
+<% end %>
 
 <div class="list-left-line"></div>
 

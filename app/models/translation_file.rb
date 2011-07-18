@@ -63,6 +63,8 @@ class TranslationFile < ActiveRecord::Base
 
   # create or return existing
   def self.create_by_name(s)
+    expire_fragment 'po-dirs-sidebar'
+
     find_by_filename_with_path(s) or create(:filename_with_path => s)
   end
 
