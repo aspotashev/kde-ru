@@ -18,7 +18,7 @@ class FileContentController < ApplicationController
   end
 
   def show
-    @file = FileContent.find(:id => params[:id])
+    @file = FileContent.find(params[:id])
     if @file
       @errors = posieve_check_rules(@file)
     end
