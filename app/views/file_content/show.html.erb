@@ -1,3 +1,9 @@
+<% if @file.nil? %>
+  <p style="color: red;">
+    Could not find translation file contents with ID=<%= params[:id] %>.
+  </p>
+<% else %>
+
 <h2>This page describes the uploaded file '<%= @file.content.original_filename %>'</h2>
 
 <% if @errors.nil? %>
@@ -67,5 +73,7 @@
 <% end %>
 
 <% else %>
+
+<% end -%>
 
 <% end -%>
