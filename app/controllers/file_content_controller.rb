@@ -18,7 +18,8 @@ class FileContentController < ApplicationController
   end
 
   def show
-    @file = FileContent.find(params[:id])
+    @file = FileContent.find(:all, :conditions => { :id => params[:id] })
+    @file = @file.size >= 0 ? @file[0] : nil;
     if @file
       @errors = posieve_check_rules(@file)
     end
