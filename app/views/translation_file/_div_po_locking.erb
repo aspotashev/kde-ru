@@ -5,8 +5,8 @@
 <td>
     <%=
       if file.can_toggle_locking?(current_user)
-	link_to file.is_locked? ? 'Unlock' : 'Lock', '#',
-	  :id => 'a' + file.id.to_s, :class => 'ajax_lock'
+	link_to_function file.is_locked? ? 'Unlock' : 'Lock',
+	  "ajax_lock_pofile(#{file.id.to_s})"
       elsif not current_user.anonymous?
 	h("Locked by " + User.find(file.user_locked).login)
       else # not locked, but cannot lock anonymously
