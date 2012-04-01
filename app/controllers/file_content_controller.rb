@@ -15,7 +15,7 @@ class FileContentController < ApplicationController
     end
 
     if params[:redirect] == 'content'
-      redirect_to res, :action => 'show'
+      redirect_to :action => 'show', :id => res.id
     else
       redirect_to :back
     end
