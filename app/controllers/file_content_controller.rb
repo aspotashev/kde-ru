@@ -14,7 +14,11 @@ class FileContentController < ApplicationController
       flash[:error] = e.record.errors.full_messages.join("\n")
     end
 
-    redirect_to :back
+    if params[:redirect] == 'content'
+      redirect_to res
+    else
+      redirect_to :back
+    end
   end
 
   def show
