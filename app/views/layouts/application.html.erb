@@ -3,7 +3,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <title><%= h(yield(:title) || "Untitled") %></title>
+    <title>
+      <%=
+        title = yield(:title)
+        h(title ? title + ' - ' + t('.website-title') : title)
+      %>
+    </title>
 
     <%= javascript_include_tag 'jquery', 'application' %>
     <%= stylesheet_link_tag 'application' %>
