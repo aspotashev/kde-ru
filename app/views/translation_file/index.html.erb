@@ -1,4 +1,6 @@
-<h2>Translation file '<%= h(@file.filename_with_path) %>'</h2>
+<% if @file.filename_with_path != '<DUMP>' %>
+  <h2>Translation file '<%= h(@file.filename_with_path) %>'</h2>
+<% end %>
 
 <%= render :partial => 'file_content/list_file_contents', :locals => { :list => @file.file_contents } %>
 
